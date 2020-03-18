@@ -2,7 +2,10 @@
   /root/Bela/projects/MEng-Project/render.cpp include/Bela.h \
   /usr/xenomai/include/cobalt/unistd.h \
   /usr/xenomai/include/cobalt/stdio.h include/GPIOcontrol.h \
-  include/Utilities.h /root/Bela/projects/MEng-Project/PitchShifter.h \
+  include/Utilities.h /usr/xenomai/include/cobalt/stdlib.h \
+  /root/Bela/projects/MEng-Project/ThereminReader.h \
+  libraries/PulseIn/PulseIn.h \
+  /root/Bela/projects/MEng-Project/PitchShifter.h \
   /root/Bela/projects/MEng-Project/PitchTracker.h
 
 include/Bela.h:
@@ -14,6 +17,12 @@ include/Bela.h:
 include/GPIOcontrol.h:
 
 include/Utilities.h:
+
+/usr/xenomai/include/cobalt/stdlib.h:
+
+/root/Bela/projects/MEng-Project/ThereminReader.h:
+
+libraries/PulseIn/PulseIn.h:
 
 /root/Bela/projects/MEng-Project/PitchShifter.h:
 

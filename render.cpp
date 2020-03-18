@@ -1,5 +1,8 @@
 #include <Bela.h>
+#include <stdlib.h>
 #include <vector>
+#include <algorithm>
+#include "ThereminReader.h"
 #include "PitchShifter.h"
 #include "PitchTracker.h"
 
@@ -9,19 +12,23 @@ std::vector<float> processAudioBuffer1;
 std::vector<float> processAudioBuffer2;
 std::vector<float> processAudioBuffer3;
 
+ThereminReader thereminReader;
 PitchShifter pitchShifter1;
 PitchShifter pitchShifter2;
 PitchShifter pitchShifter3;
 PitchTracker pitchTracker;
 
-int sampleRate;
-int bufferLength;
+int sampleRate = 0;
+int bufferLength = 0;
 
 bool setup(BelaContext *context, void *userData)
 {
 	// Get audio settings
 	sampleRate = context->audioSampleRate; // Set to 44100 Hz
-	bufferLength = context->audioFrames; // Set to 2048 frames
+	bufferLength = context->audioFrames; // Set to 128 frames
+	
+	// Initialise theremin reader
+	thereminReader.init(context);
 	
 	// Initialise pitch tracker
 	char pitchTrackingMethod[] = "yinfft";
@@ -48,6 +55,8 @@ void render(BelaContext *context, void *userData)
 	for(unsigned int frameCount = 0; frameCount < bufferLength; frameCount++) {
 		inputAudioBuffer[frameCount] = audioRead(context, frameCount, 0);
 	}
+	
+	// Read input audio into pitch shifter
 	pitchShifter1.readIn(&inputAudioBuffer[0]);
 	pitchShifter2.readIn(&inputAudioBuffer[0]);
 	pitchShifter3.readIn(&inputAudioBuffer[0]);
@@ -55,11 +64,17 @@ void render(BelaContext *context, void *userData)
 	// Estimate pitch of buffer
 	int currentF0 = pitchTracker.getPitch(inputAudioBuffer);
 	
+	// Read ultrasonic theremin sensor values
+	float thereminPitchDistance = thereminReader.readPitch(context);
+	float thereminMixDistance = thereminReader.readMix(context);
+	rt_printf("Pitch: %lf\n", thereminPitchDistance);
+	rt_printf("Mix: %lf\n", thereminMixDistance);
+		
 	// Determine desired new pitch
 	float shiftAmount1 = 3.0f; // = value from theremin controller
 	float shiftAmount2 = 5.0f; // = calculated value
 	float shiftAmount3 = -3.0f; // = calculated value
-	
+		
 	// Perform desired pitch shifts
 	pitchShifter1.shift(currentF0, shiftAmount1);
 	pitchShifter2.shift(currentF0, shiftAmount2);
