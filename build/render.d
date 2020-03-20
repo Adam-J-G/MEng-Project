@@ -5,6 +5,7 @@
   include/Utilities.h /usr/xenomai/include/cobalt/stdlib.h \
   /root/Bela/projects/MEng-Project/ThereminReader.h \
   libraries/PulseIn/PulseIn.h \
+  /root/Bela/projects/MEng-Project/HarmonyCalculator.h \
   /root/Bela/projects/MEng-Project/PitchShifter.h \
   /root/Bela/projects/MEng-Project/PitchTracker.h
 
@@ -23,6 +24,8 @@ include/Utilities.h:
 /root/Bela/projects/MEng-Project/ThereminReader.h:
 
 libraries/PulseIn/PulseIn.h:
+
+/root/Bela/projects/MEng-Project/HarmonyCalculator.h:
 
 /root/Bela/projects/MEng-Project/PitchShifter.h:
 

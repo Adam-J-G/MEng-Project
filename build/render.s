@@ -84,23 +84,26 @@ _ZN12PitchShifterD2Ev:                  @ @_ZN12PitchShifterD2Ev
 setup:                                  @ @setup
 	.fnstart
 @ BB#0:
-	.save	{r4, r10, r11, lr}
-	push	{r4, r10, r11, lr}
+	.save	{r4, r5, r11, lr}
+	push	{r4, r5, r11, lr}
 	.setfp	r11, sp, #8
 	add	r11, sp, #8
 	.pad	#16
 	sub	sp, sp, #16
-	mov	r1, r0
-	movw	r4, :lower16:.L_MergedGlobals
-	vldr	s0, [r1, #32]
-	movt	r4, :upper16:.L_MergedGlobals
+	mov	r4, r0
+	movw	r5, :lower16:.L_MergedGlobals
+	vldr	s0, [r4, #32]
+	movt	r5, :upper16:.L_MergedGlobals
 	vcvt.s32.f32	d0, d0
 	vmov	r0, s0
-	str	r0, [r4]
-	ldr	r0, [r1, #20]
-	str	r0, [r4, #4]
+	str	r0, [r5]
+	ldr	r1, [r4, #20]
+	str	r1, [r5, #4]
+	bl	__aeabi_idiv
+	str	r0, [r5, #12]
 	movw	r0, :lower16:thereminReader
 	movt	r0, :upper16:thereminReader
+	mov	r1, r4
 	bl	_ZN14ThereminReader4initEP11BelaContext
 	mov	r0, #0
 	add	r1, sp, #8
@@ -110,114 +113,115 @@ setup:                                  @ @setup
 	movw	r0, #27001
 	movt	r0, #26222
 	str	r0, [sp, #8]
-	ldm	r4, {r0, r3}
+	ldm	r5, {r0, r3}
 	str	r0, [sp]
-	add	r0, r4, #8
+	add	r0, r5, #20
 	mov	r2, r3
 	bl	_ZN12PitchTracker4initEPciii
-	ldrd	r2, r3, [r4]
-	movw	r0, :lower16:.L_MergedGlobals.3
-	movt	r0, :upper16:.L_MergedGlobals.3
-	mov	r1, r2
-	mov	r2, r3
-	bl	_ZN12PitchShifter4initEii
-	ldrd	r2, r3, [r4]
+	ldrd	r2, r3, [r5]
 	movw	r0, :lower16:.L_MergedGlobals.4
 	movt	r0, :upper16:.L_MergedGlobals.4
 	mov	r1, r2
 	mov	r2, r3
 	bl	_ZN12PitchShifter4initEii
-	ldrd	r2, r3, [r4]
+	ldrd	r2, r3, [r5]
 	movw	r0, :lower16:.L_MergedGlobals.5
 	movt	r0, :upper16:.L_MergedGlobals.5
 	mov	r1, r2
 	mov	r2, r3
 	bl	_ZN12PitchShifter4initEii
-	ldrd	r2, r3, [r4, #16]
-	ldr	r0, [r4, #4]
-	sub	r3, r3, r2
-	asr	r1, r3, #2
+	ldrd	r2, r3, [r5]
+	movw	r0, :lower16:.L_MergedGlobals.6
+	movt	r0, :upper16:.L_MergedGlobals.6
+	mov	r1, r2
+	mov	r2, r3
+	bl	_ZN12PitchShifter4initEii
+	ldr	r1, [r5, #28]
+	ldr	r2, [r5, #32]
+	ldr	r0, [r5, #4]
+	sub	r3, r2, r1
+	asr	r2, r3, #2
 	cmp	r0, r3, asr #2
 	bls	.LBB3_2
 @ BB#1:
-	sub	r1, r0, r1
-	add	r0, r4, #16
+	sub	r1, r0, r2
+	add	r0, r5, #28
 	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
-	ldr	r0, [r4, #4]
+	ldr	r0, [r5, #4]
 	b	.LBB3_3
 .LBB3_2:
-	cmp	r0, r1
-	addlo	r1, r2, r0, lsl #2
-	strlo	r1, [r4, #20]
+	cmp	r0, r2
+	addlo	r1, r1, r0, lsl #2
+	strlo	r1, [r5, #32]
 .LBB3_3:                                @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit
-	ldr	r1, [r4, #28]
-	ldr	r2, [r4, #32]
-	sub	r3, r2, r1
-	asr	r2, r3, #2
+	ldrd	r2, r3, [r5, #40]
+	sub	r3, r3, r2
+	asr	r1, r3, #2
 	cmp	r0, r3, asr #2
 	bls	.LBB3_5
 @ BB#4:
-	sub	r1, r0, r2
-	add	r0, r4, #28
+	sub	r1, r0, r1
+	add	r0, r5, #40
 	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
-	ldr	r0, [r4, #4]
+	ldr	r0, [r5, #4]
 	b	.LBB3_6
 .LBB3_5:
-	cmp	r0, r2
-	addlo	r1, r1, r0, lsl #2
-	strlo	r1, [r4, #32]
-.LBB3_6:                                @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit3
-	ldrd	r2, r3, [r4, #40]
-	sub	r3, r3, r2
-	asr	r1, r3, #2
-	cmp	r0, r3, asr #2
-	bls	.LBB3_8
-@ BB#7:
-	sub	r1, r0, r1
-	add	r0, r4, #40
-	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
-	ldr	r0, [r4, #4]
-	b	.LBB3_9
-.LBB3_8:
 	cmp	r0, r1
 	addlo	r1, r2, r0, lsl #2
-	strlo	r1, [r4, #44]
-.LBB3_9:                                @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit4
-	ldr	r1, [r4, #52]
-	ldr	r2, [r4, #56]
+	strlo	r1, [r5, #44]
+.LBB3_6:                                @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit3
+	ldr	r1, [r5, #52]
+	ldr	r2, [r5, #56]
 	sub	r3, r2, r1
 	asr	r2, r3, #2
 	cmp	r0, r3, asr #2
-	bls	.LBB3_11
-@ BB#10:
+	bls	.LBB3_8
+@ BB#7:
 	sub	r1, r0, r2
-	add	r0, r4, #52
+	add	r0, r5, #52
 	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
-	ldr	r0, [r4, #4]
-	b	.LBB3_12
-.LBB3_11:
+	ldr	r0, [r5, #4]
+	b	.LBB3_9
+.LBB3_8:
 	cmp	r0, r2
 	addlo	r1, r1, r0, lsl #2
-	strlo	r1, [r4, #56]
-.LBB3_12:                               @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit5
-	ldrd	r2, r3, [r4, #64]
+	strlo	r1, [r5, #56]
+.LBB3_9:                                @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit4
+	ldrd	r2, r3, [r5, #64]
 	sub	r3, r3, r2
 	asr	r1, r3, #2
 	cmp	r0, r3, asr #2
+	bls	.LBB3_11
+@ BB#10:
+	sub	r1, r0, r1
+	add	r0, r5, #64
+	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
+	ldr	r0, [r5, #4]
+	b	.LBB3_12
+.LBB3_11:
+	cmp	r0, r1
+	addlo	r1, r2, r0, lsl #2
+	strlo	r1, [r5, #68]
+.LBB3_12:                               @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit5
+	ldr	r1, [r5, #76]
+	ldr	r2, [r5, #80]
+	sub	r3, r2, r1
+	asr	r2, r3, #2
+	cmp	r0, r3, asr #2
 	bls	.LBB3_14
 @ BB#13:
-	sub	r1, r0, r1
-	add	r0, r4, #64
+	sub	r1, r0, r2
+	add	r0, r5, #76
 	bl	_ZNSt6vectorIfSaIfEE17_M_default_appendEj
 	b	.LBB3_15
 .LBB3_14:
-	cmp	r0, r1
-	addlo	r0, r2, r0, lsl #2
-	strlo	r0, [r4, #68]
+	cmp	r0, r2
+	addlo	r0, r1, r0, lsl #2
+	strlo	r0, [r5, #80]
 .LBB3_15:                               @ %_ZNSt6vectorIfSaIfEE6resizeEj.exit6
 	mov	r0, #1
 	sub	sp, r11, #8
-	pop	{r4, r10, r11, pc}
+	pop	{r4, r5, r11, pc}
 .Lfunc_end3:
 	.size	setup, .Lfunc_end3-setup
 	.fnend
@@ -228,25 +232,23 @@ setup:                                  @ @setup
 render:                                 @ @render
 	.fnstart
 @ BB#0:
-	.save	{r4, r5, r6, r7, r8, r9, r10, r11, lr}
-	push	{r4, r5, r6, r7, r8, r9, r10, r11, lr}
-	.setfp	r11, sp, #28
-	add	r11, sp, #28
-	.pad	#4
-	sub	sp, sp, #4
-	.vsave	{d8, d9}
-	vpush	{d8, d9}
-	movw	r8, :lower16:.L_MergedGlobals
-	mov	r4, r0
-	movt	r8, :upper16:.L_MergedGlobals
-	ldr	r0, [r8, #4]
+	.save	{r4, r5, r6, r7, r8, r9, r11, lr}
+	push	{r4, r5, r6, r7, r8, r9, r11, lr}
+	.setfp	r11, sp, #24
+	add	r11, sp, #24
+	.vsave	{d8}
+	vpush	{d8}
+	movw	r9, :lower16:.L_MergedGlobals
+	mov	r8, r0
+	movt	r9, :upper16:.L_MergedGlobals
+	ldr	r0, [r9, #4]
 	cmp	r0, #0
 	beq	.LBB4_3
-@ BB#1:                                 @ %.lr.ph51
-	ldr	r3, [r4, #24]
+@ BB#1:                                 @ %.lr.ph36
+	ldr	r3, [r8, #24]
 	mov	r7, #0
-	ldr	r2, [r4]
-	ldr	r1, [r8, #16]
+	ldr	r2, [r8]
+	ldr	r1, [r9, #28]
 	lsl	r3, r3, #2
 .LBB4_2:                                @ =>This Inner Loop Header: Depth=1
 	ldr	r6, [r2], r3
@@ -255,90 +257,104 @@ render:                                 @ @render
 	cmp	r7, r0
 	blo	.LBB4_2
 	b	.LBB4_4
-.LBB4_3:                                @ %.._crit_edge52_crit_edge
-	ldr	r1, [r8, #16]
-.LBB4_4:                                @ %._crit_edge52
-	movw	r0, :lower16:.L_MergedGlobals.3
-	movt	r0, :upper16:.L_MergedGlobals.3
+.LBB4_3:                                @ %.._crit_edge37_crit_edge
+	ldr	r1, [r9, #28]
+.LBB4_4:                                @ %._crit_edge37
+	movw	r0, :lower16:.L_MergedGlobals.4
+	movt	r0, :upper16:.L_MergedGlobals.4
 	bl	_ZN12PitchShifter6readInEPf
-	mov	r5, r8
-	movw	r9, :lower16:.L_MergedGlobals.4
-	ldr	r1, [r5, #16]!
-	movt	r9, :upper16:.L_MergedGlobals.4
-	mov	r0, r9
+	mov	r6, r9
+	movw	r0, :lower16:.L_MergedGlobals.5
+	ldr	r1, [r6, #28]!
+	movt	r0, :upper16:.L_MergedGlobals.5
 	bl	_ZN12PitchShifter6readInEPf
-	movw	r10, :lower16:.L_MergedGlobals.5
-	ldr	r1, [r5]
-	movt	r10, :upper16:.L_MergedGlobals.5
-	mov	r0, r10
+	ldr	r1, [r6]
+	movw	r0, :lower16:.L_MergedGlobals.6
+	movt	r0, :upper16:.L_MergedGlobals.6
 	bl	_ZN12PitchShifter6readInEPf
-	sub	r0, r5, #8
-	mov	r1, r5
+	sub	r0, r6, #8
+	mov	r1, r6
 	bl	_ZN12PitchTracker8getPitchERSt6vectorIfSaIfEE
-	movw	r6, :lower16:thereminReader
-	mov	r7, r0
-	movt	r6, :upper16:thereminReader
-	mov	r1, r4
-	mov	r0, r6
+	mov	r5, r0
+	ldrd	r0, r1, [r6, #-20]
+	cmp	r0, r1
+	bne	.LBB4_6
+@ BB#5:
+	mov	r0, #0
+	mov	r1, r8
+	str	r0, [r9, #8]
+	movw	r0, :lower16:thereminReader
+	movt	r0, :upper16:thereminReader
 	bl	_ZN14ThereminReader9readPitchEP11BelaContext
-	mov	r0, r6
-	mov	r1, r4
-	vmov.f32	s16, s0
-	bl	_ZN14ThereminReader7readMixEP11BelaContext
-	vcvt.f64.f32	d16, s16
+	vcvt.f64.f32	d16, s0
 	movw	r0, :lower16:.L.str
 	movt	r0, :upper16:.L.str
 	vmov	r2, r3, d16
-	vmov.f32	s18, s0
+	vstr	s0, [r9, #16]
 	bl	rt_printf
-	vcvt.f64.f32	d16, s18
-	movw	r0, :lower16:.L.str.9
-	movt	r0, :upper16:.L.str.9
-	vmov	r2, r3, d16
-	bl	rt_printf
-	vmov	s0, r7
-	movw	r6, :lower16:.L_MergedGlobals.3
+	ldr	r0, [r9, #8]
+.LBB4_6:
+	vmov	s0, r5
+	movw	r5, :lower16:.L_MergedGlobals.3
 	vcvt.f32.s32	d8, d0
-	movt	r6, :upper16:.L_MergedGlobals.3
-	vmov.f32	d1, #3.000000e+00
+	add	r0, r0, #1
+	str	r0, [r9, #8]
+	movt	r5, :upper16:.L_MergedGlobals.3
+	vldr	s1, [r9, #16]
+	mov	r0, r5
+	vmov.f32	s0, s16
+	bl	_ZN17HarmonyCalculator14setInputValuesEff
+	mov	r0, r5
+	bl	_ZN17HarmonyCalculator15getFirstHarmonyEv
+	vmov.f32	s2, s0
+	movw	r6, :lower16:.L_MergedGlobals.4
+	vmov.f32	s0, s16
+	movt	r6, :upper16:.L_MergedGlobals.4
 	mov	r0, r6
 	vmov.f32	s1, s2
-	vmov.f32	s0, s16
 	bl	_ZN12PitchShifter5shiftEff
-	vmov.f32	d1, #5.000000e+00
-	mov	r0, r9
+	mov	r0, r5
+	bl	_ZN17HarmonyCalculator16getSecondHarmonyEv
+	vmov.f32	s2, s0
+	movw	r7, :lower16:.L_MergedGlobals.5
 	vmov.f32	s0, s16
+	movt	r7, :upper16:.L_MergedGlobals.5
+	mov	r0, r7
 	vmov.f32	s1, s2
 	bl	_ZN12PitchShifter5shiftEff
-	vmov.f32	d1, #-3.000000e+00
-	mov	r0, r10
+	mov	r0, r5
+	bl	_ZN17HarmonyCalculator15getThirdHarmonyEv
+	vmov.f32	s2, s0
+	movw	r5, :lower16:.L_MergedGlobals.6
 	vmov.f32	s0, s16
+	movt	r5, :upper16:.L_MergedGlobals.6
+	mov	r0, r5
 	vmov.f32	s1, s2
 	bl	_ZN12PitchShifter5shiftEff
-	ldr	r1, [r5, #24]
+	ldr	r1, [r9, #52]
 	mov	r0, r6
 	bl	_ZN12PitchShifter7readOutEPf
-	ldr	r1, [r5, #36]
-	mov	r0, r9
+	ldr	r1, [r9, #64]
+	mov	r0, r7
 	bl	_ZN12PitchShifter7readOutEPf
-	ldr	r1, [r5, #48]
-	mov	r0, r10
+	ldr	r1, [r9, #76]
+	mov	r0, r5
 	bl	_ZN12PitchShifter7readOutEPf
-	ldr	r12, [r5, #-12]
+	ldr	r12, [r9, #4]
 	cmp	r12, #0
-	beq	.LBB4_7
-@ BB#5:                                 @ %.lr.ph
-	ldr	r0, [r4, #4]
-	ldr	r4, [r4, #28]
-	ldr	r1, [r8, #16]
+	beq	.LBB4_9
+@ BB#7:                                 @ %.lr.ph
+	ldr	r0, [r8, #4]
+	ldr	r4, [r8, #28]
+	ldr	r1, [r9, #28]
 	add	r5, r0, #4
-	ldr	r2, [r8, #28]
+	ldr	r2, [r9, #40]
 	mov	r0, #0
-	ldr	r3, [r8, #40]
+	ldr	r3, [r9, #52]
 	lsl	lr, r4, #2
-	ldr	r7, [r8, #52]
-	ldr	r6, [r8, #64]
-.LBB4_6:                                @ =>This Inner Loop Header: Depth=1
+	ldr	r7, [r9, #64]
+	ldr	r6, [r9, #76]
+.LBB4_8:                                @ =>This Inner Loop Header: Depth=1
 	vldr	s0, [r1]
 	add	r4, r2, r0, lsl #2
 	vldr	s2, [r3]
@@ -358,11 +374,10 @@ render:                                 @ @render
 	str	r4, [r5]
 	add	r5, r5, lr
 	cmp	r0, r12
-	blo	.LBB4_6
-.LBB4_7:                                @ %._crit_edge
-	vpop	{d8, d9}
-	add	sp, sp, #4
-	pop	{r4, r5, r6, r7, r8, r9, r10, r11, pc}
+	blo	.LBB4_8
+.LBB4_9:                                @ %._crit_edge
+	vpop	{d8}
+	pop	{r4, r5, r6, r7, r8, r9, r11, pc}
 .Lfunc_end4:
 	.size	render, .Lfunc_end4-render
 	.fnend
@@ -466,8 +481,8 @@ _ZNSt6vectorIfSaIfEE17_M_default_appendEj: @ @_ZNSt6vectorIfSaIfEE17_M_default_a
 	str	r0, [r4, #4]
 	pop	{r4, r5, r6, r7, r8, r10, r11, pc}
 .LBB6_13:
-	movw	r0, :lower16:.L.str.10
-	movt	r0, :upper16:.L.str.10
+	movw	r0, :lower16:.L.str.9
+	movt	r0, :upper16:.L.str.9
 	mov	lr, pc
 	b	_ZSt20__throw_length_errorPKc
 .LBB6_14:
@@ -493,17 +508,10 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	movw	r4, :lower16:__dso_handle
 	mov	r7, #0
 	mov	r1, r5
-	str	r7, [r1, #16]!
+	str	r7, [r1, #28]!
 	movt	r6, :upper16:_ZNSt6vectorIfSaIfEED2Ev
 	movt	r4, :upper16:__dso_handle
 	mov	r0, r6
-	mov	r2, r4
-	str	r7, [r5, #20]
-	str	r7, [r5, #24]
-	bl	__cxa_atexit
-	mov	r1, r5
-	mov	r0, r6
-	str	r7, [r1, #28]!
 	mov	r2, r4
 	str	r7, [r5, #32]
 	str	r7, [r5, #36]
@@ -522,7 +530,14 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	str	r7, [r5, #56]
 	str	r7, [r5, #60]
 	bl	__cxa_atexit
-	str	r7, [r5, #64]!
+	mov	r1, r5
+	mov	r0, r6
+	str	r7, [r1, #64]!
+	mov	r2, r4
+	str	r7, [r5, #68]
+	str	r7, [r5, #72]
+	bl	__cxa_atexit
+	str	r7, [r5, #76]!
 	mov	r0, r6
 	mov	r2, r4
 	mov	r1, r5
@@ -545,14 +560,13 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	str	r2, [r1, #20]
 	mov	r5, #2
 	str	r0, [r1, #48]
-	movw	r0, #2646
+	mov	r0, #7
 	str	r7, [r1, #52]
 	mov	r12, #3
 	str	r7, [r1, #56]
 	str	r7, [r1, #60]
 	str	r2, [r1, #68]
-	mov	r2, #7
-	str	r7, [r1, #128]
+	mov	r2, #100
 	stm	lr, {r0, r2, r3, r7}
 	movw	r0, :lower16:_ZN14ThereminReaderD2Ev
 	movt	r0, :upper16:_ZN14ThereminReaderD2Ev
@@ -560,10 +574,9 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	str	r6, [r1, #112]
 	str	r5, [r1, #116]
 	str	r12, [r1, #120]
-	str	r7, [r1, #124]
 	bl	__cxa_atexit
-	movw	r5, :lower16:.L_MergedGlobals.3
-	movt	r5, :upper16:.L_MergedGlobals.3
+	movw	r5, :lower16:.L_MergedGlobals.4
+	movt	r5, :upper16:.L_MergedGlobals.4
 	mov	r0, r5
 	bl	_ZN10soundtouch10SoundTouchC1Ev
 	movw	r6, :lower16:_ZN12PitchShifterD2Ev
@@ -572,16 +585,16 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	mov	r2, r4
 	mov	r0, r6
 	bl	__cxa_atexit
-	movw	r5, :lower16:.L_MergedGlobals.4
-	movt	r5, :upper16:.L_MergedGlobals.4
+	movw	r5, :lower16:.L_MergedGlobals.5
+	movt	r5, :upper16:.L_MergedGlobals.5
 	mov	r0, r5
 	bl	_ZN10soundtouch10SoundTouchC1Ev
 	mov	r0, r6
 	mov	r1, r5
 	mov	r2, r4
 	bl	__cxa_atexit
-	movw	r5, :lower16:.L_MergedGlobals.5
-	movt	r5, :upper16:.L_MergedGlobals.5
+	movw	r5, :lower16:.L_MergedGlobals.6
+	movt	r5, :upper16:.L_MergedGlobals.6
 	mov	r0, r5
 	bl	_ZN10soundtouch10SoundTouchC1Ev
 	mov	r0, r6
@@ -598,8 +611,15 @@ _GLOBAL__sub_I_render.ii:               @ @_GLOBAL__sub_I_render.ii
 	.globl	thereminReader
 	.p2align	3
 thereminReader:
-	.zero	136
-	.size	thereminReader, 136
+	.zero	128
+	.size	thereminReader, 128
+
+	.type	thereminMixDistance,%object @ @thereminMixDistance
+	.globl	thereminMixDistance
+	.p2align	2
+thereminMixDistance:
+	.long	0                       @ float 0
+	.size	thereminMixDistance, 4
 
 	.type	.L_ZZ5setupE19pitchTrackingMethod,%object @ @_ZZ5setupE19pitchTrackingMethod
 	.section	.rodata.str1.1,"aMS",%progbits,1
@@ -614,29 +634,43 @@ thereminReader:
 
 	.type	.L.str.9,%object        @ @.str.9
 .L.str.9:
-	.asciz	"Mix: %lf\n"
-	.size	.L.str.9, 10
-
-	.type	.L.str.10,%object       @ @.str.10
-.L.str.10:
 	.asciz	"vector::_M_default_append"
-	.size	.L.str.10, 26
+	.size	.L.str.9, 26
 
 	.section	.init_array,"aw",%init_array
 	.p2align	2
 	.long	_GLOBAL__sub_I_render.ii(target1)
 	.type	.L_MergedGlobals,%object @ @_MergedGlobals
 	.local	.L_MergedGlobals
-	.comm	.L_MergedGlobals,76,16
+	.comm	.L_MergedGlobals,88,16
 	.type	.L_MergedGlobals.3,%object @ @_MergedGlobals.3
-	.local	.L_MergedGlobals.3
-	.comm	.L_MergedGlobals.3,88,16
+	.data
+	.p2align	4
+.L_MergedGlobals.3:
+	.long	0                       @ float 0
+	.long	0                       @ float 0
+	.long	1073741824              @ float 2
+	.long	1082130432              @ float 4
+	.long	1084227584              @ float 5
+	.long	1088421888              @ float 7
+	.long	1091567616              @ float 9
+	.long	1093664768              @ float 11
+	.long	0                       @ float 0
+	.long	0                       @ float 0
+	.long	0                       @ float 0
+	.long	0                       @ float 0
+	.long	0                       @ float 0
+	.size	.L_MergedGlobals.3, 52
+
 	.type	.L_MergedGlobals.4,%object @ @_MergedGlobals.4
 	.local	.L_MergedGlobals.4
 	.comm	.L_MergedGlobals.4,88,16
 	.type	.L_MergedGlobals.5,%object @ @_MergedGlobals.5
 	.local	.L_MergedGlobals.5
 	.comm	.L_MergedGlobals.5,88,16
+	.type	.L_MergedGlobals.6,%object @ @_MergedGlobals.6
+	.local	.L_MergedGlobals.6
+	.comm	.L_MergedGlobals.6,88,16
 
 	.globl	sampleRate
 sampleRate = .L_MergedGlobals
@@ -644,32 +678,44 @@ sampleRate = .L_MergedGlobals
 	.globl	bufferLength
 bufferLength = .L_MergedGlobals+4
 	.size	bufferLength, 4
+	.globl	thereminCount
+thereminCount = .L_MergedGlobals+8
+	.size	thereminCount, 4
+	.globl	thereminRead
+thereminRead = .L_MergedGlobals+12
+	.size	thereminRead, 4
+	.globl	thereminPitchDistance
+thereminPitchDistance = .L_MergedGlobals+16
+	.size	thereminPitchDistance, 4
 	.globl	pitchTracker
-pitchTracker = .L_MergedGlobals+8
+pitchTracker = .L_MergedGlobals+20
 	.size	pitchTracker, 8
 	.globl	inputAudioBuffer
-inputAudioBuffer = .L_MergedGlobals+16
+inputAudioBuffer = .L_MergedGlobals+28
 	.size	inputAudioBuffer, 12
 	.globl	outputAudioBuffer
-outputAudioBuffer = .L_MergedGlobals+28
+outputAudioBuffer = .L_MergedGlobals+40
 	.size	outputAudioBuffer, 12
 	.globl	processAudioBuffer1
-processAudioBuffer1 = .L_MergedGlobals+40
+processAudioBuffer1 = .L_MergedGlobals+52
 	.size	processAudioBuffer1, 12
 	.globl	processAudioBuffer2
-processAudioBuffer2 = .L_MergedGlobals+52
+processAudioBuffer2 = .L_MergedGlobals+64
 	.size	processAudioBuffer2, 12
 	.globl	processAudioBuffer3
-processAudioBuffer3 = .L_MergedGlobals+64
+processAudioBuffer3 = .L_MergedGlobals+76
 	.size	processAudioBuffer3, 12
+	.globl	harmonyCalculator
+harmonyCalculator = .L_MergedGlobals.3
+	.size	harmonyCalculator, 52
 	.globl	pitchShifter1
-pitchShifter1 = .L_MergedGlobals.3
+pitchShifter1 = .L_MergedGlobals.4
 	.size	pitchShifter1, 88
 	.globl	pitchShifter2
-pitchShifter2 = .L_MergedGlobals.4
+pitchShifter2 = .L_MergedGlobals.5
 	.size	pitchShifter2, 88
 	.globl	pitchShifter3
-pitchShifter3 = .L_MergedGlobals.5
+pitchShifter3 = .L_MergedGlobals.6
 	.size	pitchShifter3, 88
 	.ident	"clang version 3.9.1-9 (tags/RELEASE_391/rc2)"
 	.section	".note.GNU-stack","",%progbits

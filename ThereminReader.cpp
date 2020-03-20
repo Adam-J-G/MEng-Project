@@ -15,19 +15,18 @@ void ThereminReader::init(BelaContext *context) {
 }
 
 float ThereminReader::readPitch(BelaContext *context) {
-	pinMode(context, 0, pitchTriggerDigitalOutPin, OUTPUT); // sending to TRIGGER PIN
+	pinMode(context, 0, pitchTriggerDigitalOutPin, OUTPUT); // sending to TRIGGER PIN (pitch)
 	
 	for(unsigned int n = 0; n<context->digitalFrames; n++) {
-		pitchTriggerCount++;
-		if(pitchTriggerCount == triggerInterval) {
-			pitchTriggerCount = 0;
+		if (n == 0) {
 			digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, HIGH); //write the status to the trig pin
-		} else {
+		} 
+		if (n == 1) {
 			digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, LOW); //write the status to the trig pin
 		}
 		int pulseLength = pitchPulseIn.hasPulsed(context, n); // will return the pulse duration(in samples) if a pulse just ended 
 		float duration = 1e6 * pulseLength / context->digitalSampleRate; // pulse duration in microseconds
-		if(pulseLength >= minPulseLength){
+		if((pulseLength >= minPulseLength) && (pulseLength <= maxPulseLength)) {
 			// rescaling according to the datasheet
 			return (duration / rescaleVal);
 		}
@@ -36,19 +35,18 @@ float ThereminReader::readPitch(BelaContext *context) {
 }
 
 float ThereminReader::readMix(BelaContext *context) {
-	pinMode(context, 0, mixTriggerDigitalOutPin, OUTPUT); // sending to TRIGGER PIN
+	pinMode(context, 0, mixTriggerDigitalOutPin, OUTPUT); // sending to TRIGGER PIN (mix)
 	
 	for(unsigned int n = 0; n<context->digitalFrames; n++) {
-		mixTriggerCount++;
-		if(mixTriggerCount == triggerInterval) {
-			mixTriggerCount = 0;
+		if (n == 0) {
 			digitalWriteOnce(context, n / 2, mixTriggerDigitalOutPin, HIGH); //write the status to the trig pin
-		} else {
+		}
+		if (n == 10) {
 			digitalWriteOnce(context, n / 2, mixTriggerDigitalOutPin, LOW); //write the status to the trig pin
 		}
 		int pulseLength = mixPulseIn.hasPulsed(context, n); // will return the pulse duration(in samples) if a pulse just ended 
 		float duration = 1e6 * pulseLength / context->digitalSampleRate; // pulse duration in microseconds
-		if(pulseLength >= minPulseLength){
+		if(pulseLength >= minPulseLength && (pulseLength <= maxPulseLength)) {
 			// rescaling according to the datasheet
 			return (duration / rescaleVal);
 		}

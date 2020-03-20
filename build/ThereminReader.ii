@@ -14469,17 +14469,14 @@ private:
  PulseIn pitchPulseIn;
  PulseIn mixPulseIn;
 
- int triggerInterval = 2646;
  int minPulseLength = 7;
+ int maxPulseLength = 100;
  float rescaleVal = 58;
 
  unsigned int pitchTriggerDigitalOutPin = 0;
  unsigned int pitchEchoDigitalInPin = 1;
  unsigned int mixTriggerDigitalOutPin = 2;
  unsigned int mixEchoDigitalInPin = 3;
-
- int pitchTriggerCount = 0;
- int mixTriggerCount = 0;
 };
 # 4 "/root/Bela/projects/MEng-Project/ThereminReader.cpp" 2
 
@@ -14499,16 +14496,15 @@ float ThereminReader::readPitch(BelaContext *context) {
  pinMode(context, 0, pitchTriggerDigitalOutPin, 0x1);
 
  for(unsigned int n = 0; n<context->digitalFrames; n++) {
-  pitchTriggerCount++;
-  if(pitchTriggerCount == triggerInterval) {
-   pitchTriggerCount = 0;
+  if (n == 0) {
    digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, HIGH);
-  } else {
+  }
+  if (n == 1) {
    digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, LOW);
   }
   int pulseLength = pitchPulseIn.hasPulsed(context, n);
   float duration = 1e6 * pulseLength / context->digitalSampleRate;
-  if(pulseLength >= minPulseLength){
+  if((pulseLength >= minPulseLength) && (pulseLength <= maxPulseLength)) {
 
    return (duration / rescaleVal);
   }
@@ -14520,16 +14516,15 @@ float ThereminReader::readMix(BelaContext *context) {
  pinMode(context, 0, mixTriggerDigitalOutPin, 0x1);
 
  for(unsigned int n = 0; n<context->digitalFrames; n++) {
-  mixTriggerCount++;
-  if(mixTriggerCount == triggerInterval) {
-   mixTriggerCount = 0;
+  if (n == 0) {
    digitalWriteOnce(context, n / 2, mixTriggerDigitalOutPin, HIGH);
-  } else {
+  }
+  if (n == 10) {
    digitalWriteOnce(context, n / 2, mixTriggerDigitalOutPin, LOW);
   }
   int pulseLength = mixPulseIn.hasPulsed(context, n);
   float duration = 1e6 * pulseLength / context->digitalSampleRate;
-  if(pulseLength >= minPulseLength){
+  if(pulseLength >= minPulseLength && (pulseLength <= maxPulseLength)) {
 
    return (duration / rescaleVal);
   }

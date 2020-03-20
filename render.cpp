@@ -1,8 +1,8 @@
 #include <Bela.h>
 #include <stdlib.h>
 #include <vector>
-#include <algorithm>
 #include "ThereminReader.h"
+#include "HarmonyCalculator.h"
 #include "PitchShifter.h"
 #include "PitchTracker.h"
 
@@ -13,6 +13,7 @@ std::vector<float> processAudioBuffer2;
 std::vector<float> processAudioBuffer3;
 
 ThereminReader thereminReader;
+HarmonyCalculator harmonyCalculator;
 PitchShifter pitchShifter1;
 PitchShifter pitchShifter2;
 PitchShifter pitchShifter3;
@@ -21,11 +22,17 @@ PitchTracker pitchTracker;
 int sampleRate = 0;
 int bufferLength = 0;
 
+int thereminCount = 0;
+int thereminRead = 0;
+float thereminPitchDistance = 0.0f;
+float thereminMixDistance = 0.0f;
+
 bool setup(BelaContext *context, void *userData)
 {
 	// Get audio settings
 	sampleRate = context->audioSampleRate; // Set to 44100 Hz
 	bufferLength = context->audioFrames; // Set to 128 frames
+	thereminRead = sampleRate/bufferLength;
 	
 	// Initialise theremin reader
 	thereminReader.init(context);
@@ -64,21 +71,24 @@ void render(BelaContext *context, void *userData)
 	// Estimate pitch of buffer
 	int currentF0 = pitchTracker.getPitch(inputAudioBuffer);
 	
-	// Read ultrasonic theremin sensor values
-	float thereminPitchDistance = thereminReader.readPitch(context);
-	float thereminMixDistance = thereminReader.readMix(context);
-	rt_printf("Pitch: %lf\n", thereminPitchDistance);
-	rt_printf("Mix: %lf\n", thereminMixDistance);
+	// Read theremin once every second
+	if (thereminCount == thereminRead) {
+		thereminCount = 0;
 		
+		thereminPitchDistance = thereminReader.readPitch(context);
+		//thereminMixDistance = thereminReader.readMix(context);
+		rt_printf("Pitch: %lf\n", thereminPitchDistance);
+		//rt_printf("Mix: %lf\n", thereminMixDistance);
+	}
+	thereminCount++;
+	
 	// Determine desired new pitch
-	float shiftAmount1 = 3.0f; // = value from theremin controller
-	float shiftAmount2 = 5.0f; // = calculated value
-	float shiftAmount3 = -3.0f; // = calculated value
-		
+	harmonyCalculator.setInputValues(currentF0, thereminPitchDistance);
+	
 	// Perform desired pitch shifts
-	pitchShifter1.shift(currentF0, shiftAmount1);
-	pitchShifter2.shift(currentF0, shiftAmount2);
-	pitchShifter3.shift(currentF0, shiftAmount3);
+	pitchShifter1.shift(currentF0, harmonyCalculator.getFirstHarmony());
+	pitchShifter2.shift(currentF0, harmonyCalculator.getSecondHarmony());
+	pitchShifter3.shift(currentF0, harmonyCalculator.getThirdHarmony());
 	
 	// Read shifted values from pitch shifter
 	pitchShifter1.readOut(&processAudioBuffer1[0]);
@@ -101,5 +111,5 @@ void render(BelaContext *context, void *userData)
 
 void cleanup(BelaContext *context, void *userData)
 {
-
+	
 }
