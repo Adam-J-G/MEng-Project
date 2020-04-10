@@ -1,24 +1,32 @@
 /***** HarmonyCalculator.h *****/
 
 #include <math.h>
-#include <math_neon.h>
 
 class HarmonyCalculator {
 public:
 	void setKeySig(int keySig);
 	void setInputValues(float currentF0, float currentThereminVal);
-	int getNoteInScaleIndex(float note);
-	float getFirstHarmony();
-	float getSecondHarmony();
-	float getThirdHarmony();
+	int getNoteIn();
+	int getFirstHarmonyNote();
+	int getSecondHarmonyNote();
+	int getThirdHarmonyNote();
+	float getFirstHarmonyShift();
+	float getSecondHarmonyShift();
+	float getThirdHarmonyShift();
 	
 private:
-	float keySig = 0.0f;
-	float scale[7] = { 0.0f, 2.0f, 4.0f, 5.0f, 7.0f, 9.0f, 11.0f };
+	int getNoteInScaleIndex(int note);
+
+	int keySig = 0;
+	int scale[7] = { 0, 2, 4, 5, 7, 9, 11 };
 	float interval = 0.0f;
 	float prevThereminVal = 0.0f;
 	
-	float firstHarmony = 0.0f;
-	float secondHarmony = 0.0f;
-	float thirdHarmony = 0.0f;
+	int noteIn = 0;
+	int firstHarmonyNote = 0;
+	int secondHarmonyNote = 0;
+	int thirdHarmonyNote = 0;
+	float firstHarmonyShift = 0.0f;
+	float secondHarmonyShift = 0.0f;
+	float thirdHarmonyShift = 0.0f;
 };

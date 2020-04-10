@@ -16,21 +16,29 @@ void ThereminReader::init(BelaContext *context) {
 
 float ThereminReader::readPitch(BelaContext *context) {
 	pinMode(context, 0, pitchTriggerDigitalOutPin, OUTPUT); // sending to TRIGGER PIN (pitch)
+	digitalWriteOnce(context, 0, pitchTriggerDigitalOutPin, LOW); //write the status to the trig pin
 	
 	for(unsigned int n = 0; n<context->digitalFrames; n++) {
-		if (n == 0) {
+		pitchTriggerCount++;
+		if(pitchTriggerCount == triggerInterval) {
+			pitchTriggerCount = 0;
 			digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, HIGH); //write the status to the trig pin
-		} 
-		if (n == 1) {
+		} else {
 			digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, LOW); //write the status to the trig pin
 		}
 		int pulseLength = pitchPulseIn.hasPulsed(context, n); // will return the pulse duration(in samples) if a pulse just ended 
 		float duration = 1e6 * pulseLength / context->digitalSampleRate; // pulse duration in microseconds
 		if((pulseLength >= minPulseLength) && (pulseLength <= maxPulseLength)) {
 			// rescaling according to the datasheet
-			return (duration / rescaleVal);
+			float distance = duration / rescaleVal;
+			if (distance < 40.0f) {
+				return distance;
+			} else {
+				return 0.0f;
+			}
 		}
 	}
+	pitchPulseIn.check(context);
 	return 0.0f;
 }
 

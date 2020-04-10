@@ -2,16 +2,18 @@
 
 #include "PitchTracker.h"
 
-void PitchTracker::init(char* pitch_method, int buffer_size, int hop_size, int samplerate) {
+void PitchTracker::init(char* pitchMethod, int bufferSize, int samplerate) {
 	// Pass initialisation variables to pitch estimation tool
-	pitchDetector = new_aubio_pitch (pitch_method, buffer_size, hop_size, samplerate);
+	pitchDetector = new_aubio_pitch (pitchMethod, bufferSize, bufferSize, samplerate);
 	pitchBuffer = new_fvec(1);
+	
+	fvecAudioBuffer = new_fvec(bufferSize);
+	this->bufferSize = bufferSize;
 }
 
-int PitchTracker::getPitch(std::vector<float> &audioBuffer) {
+int PitchTracker::getPitch(float* audioBuffer) {
 	// Fill specialised float vector with audio buffer data
-	fvec_t* fvecAudioBuffer = new_fvec (audioBuffer.size());
-	for (int i = 0; i < fvecAudioBuffer->length; i++) {
+	for (int i = 0; i < bufferSize; i++) {
 		fvecAudioBuffer->data[i] = audioBuffer[i];
 	}
 

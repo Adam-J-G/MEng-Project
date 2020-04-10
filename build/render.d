@@ -6,8 +6,10 @@
   /root/Bela/projects/MEng-Project/ThereminReader.h \
   libraries/PulseIn/PulseIn.h \
   /root/Bela/projects/MEng-Project/HarmonyCalculator.h \
+  /root/Bela/projects/MEng-Project/LEDManager.h \
   /root/Bela/projects/MEng-Project/PitchShifter.h \
-  /root/Bela/projects/MEng-Project/PitchTracker.h
+  /root/Bela/projects/MEng-Project/PitchTracker.h \
+  /root/Bela/projects/MEng-Project/Reverberator.h
 
 include/Bela.h:
 
@@ -27,6 +29,10 @@ libraries/PulseIn/PulseIn.h:
 
 /root/Bela/projects/MEng-Project/HarmonyCalculator.h:
 
+/root/Bela/projects/MEng-Project/LEDManager.h:
+
 /root/Bela/projects/MEng-Project/PitchShifter.h:
 
 /root/Bela/projects/MEng-Project/PitchTracker.h:
+
+/root/Bela/projects/MEng-Project/Reverberator.h:

@@ -14470,8 +14470,10 @@ private:
  PulseIn mixPulseIn;
 
  int minPulseLength = 7;
- int maxPulseLength = 100;
+ int maxPulseLength = 1000;
  float rescaleVal = 58;
+ int triggerInterval = 2646;
+ int pitchTriggerCount = 0;
 
  unsigned int pitchTriggerDigitalOutPin = 0;
  unsigned int pitchEchoDigitalInPin = 1;
@@ -14494,21 +14496,29 @@ void ThereminReader::init(BelaContext *context) {
 
 float ThereminReader::readPitch(BelaContext *context) {
  pinMode(context, 0, pitchTriggerDigitalOutPin, 0x1);
+ digitalWriteOnce(context, 0, pitchTriggerDigitalOutPin, LOW);
 
  for(unsigned int n = 0; n<context->digitalFrames; n++) {
-  if (n == 0) {
+  pitchTriggerCount++;
+  if(pitchTriggerCount == triggerInterval) {
+   pitchTriggerCount = 0;
    digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, HIGH);
-  }
-  if (n == 1) {
+  } else {
    digitalWriteOnce(context, n / 2, pitchTriggerDigitalOutPin, LOW);
   }
   int pulseLength = pitchPulseIn.hasPulsed(context, n);
   float duration = 1e6 * pulseLength / context->digitalSampleRate;
   if((pulseLength >= minPulseLength) && (pulseLength <= maxPulseLength)) {
 
-   return (duration / rescaleVal);
+   float distance = duration / rescaleVal;
+   if (distance < 40.0f) {
+    return distance;
+   } else {
+    return 0.0f;
+   }
   }
  }
+ pitchPulseIn.check(context);
  return 0.0f;
 }
 
