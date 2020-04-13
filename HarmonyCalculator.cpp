@@ -3,8 +3,8 @@
 #include "HarmonyCalculator.h"
 #include <Bela.h>
 
-void HarmonyCalculator::setKeySig(int keySig) {
-	this->keySig = keySig;
+void HarmonyCalculator::setKeySig(int key) {
+	keySig = (key + 3) % 12;
 	scale[0] = keySig;
 	scale[1] = (keySig + 2) % 12;
 	scale[2] = (keySig + 4) % 12;
@@ -43,11 +43,17 @@ void HarmonyCalculator::setInputValues(float currentF0, float currentThereminVal
 	thirdHarmonyNote = scale[((noteIndex + (static_cast<int>(intervalRound) * 3)) % 7)];
 	
 	firstHarmonyShift = firstHarmonyNote - noteIn + intervalDif;
-	/*if (firstHarmonyShift > 6.0f) {
+	if (firstHarmonyShift > 6.0f) {
 		firstHarmonyShift = firstHarmonyShift - 12.0f;
-	}*/
+	}
 	secondHarmonyShift = secondHarmonyNote - noteIn + intervalDif;
+	if (secondHarmonyShift > 6.0f) {
+		secondHarmonyShift = secondHarmonyShift - 12.0f;
+	}
 	thirdHarmonyShift = thirdHarmonyNote - noteIn + intervalDif;
+	if (thirdHarmonyShift > 6.0f) {
+		thirdHarmonyShift = thirdHarmonyShift - 12.0f;
+	}
 }
 
 int HarmonyCalculator::getNoteInScaleIndex(int note) {

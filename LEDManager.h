@@ -10,6 +10,8 @@ class LEDManager {
 public:
 	void init(BelaContext *context);
 	void updateNotes(BelaContext* context, int numHarmonies, int note1, int note2, int note3, int note4);
+	void lightUpTo(BelaContext* context, int pinNum);
+	void lightPin(BelaContext* context, int pinNum);
 	void clearNotes(BelaContext* context);
 private:
 	int getLEDPin(int note);

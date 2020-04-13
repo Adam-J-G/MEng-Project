@@ -19504,7 +19504,7 @@ private:
 
 class HarmonyCalculator {
 public:
- void setKeySig(int keySig);
+ void setKeySig(int key);
  void setInputValues(float currentF0, float currentThereminVal);
  int getNoteIn();
  int getFirstHarmonyNote();
@@ -19552,47 +19552,16 @@ private:
 # 1 "/root/Bela/projects/MEng-Project/PitchShifter.h" 1
 
 
-# 1 "/usr/include/soundtouch/SoundTouch.h" 1 3 4
-# 75 "/usr/include/soundtouch/SoundTouch.h" 3 4
-# 1 "/usr/include/soundtouch/FIFOSamplePipe.h" 1 3 4
-# 51 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
-# 1 "/usr/include/assert.h" 1 3 4
-# 51 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
-
-# 1 "/usr/xenomai/include/cobalt/stdlib.h" 1 3 4
-# 19 "/usr/xenomai/include/cobalt/stdlib.h" 3
-# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdlib.h" 1 3
-# 20 "/usr/xenomai/include/cobalt/stdlib.h" 2 3
-# 52 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
-
-# 1 "/usr/include/soundtouch/STTypes.h" 1 3 4
-# 42 "/usr/include/soundtouch/STTypes.h" 3 4
-typedef unsigned int uint;
-typedef unsigned long ulong;
+# 1 "/usr/local/include/stk/PitShift.h" 1 3
 
 
 
-
-
-    typedef ulong ulongptr;
-# 60 "/usr/include/soundtouch/STTypes.h" 3 4
-# 1 "/usr/include/soundtouch/soundtouch_config.h" 1 3 4
-# 60 "/usr/include/soundtouch/STTypes.h" 2 3 4
+# 1 "/usr/local/include/stk/Effect.h" 1 3
 
 
 
+# 1 "/usr/local/include/stk/Stk.h" 1 3
 
-namespace soundtouch
-{
-# 153 "/usr/include/soundtouch/STTypes.h" 3 4
-        typedef float SAMPLETYPE;
-
-        typedef double LONG_SAMPLETYPE;
-# 164 "/usr/include/soundtouch/STTypes.h" 3 4
-};
-# 174 "/usr/include/soundtouch/STTypes.h" 3 4
-# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 1 3 4
-# 37 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 3
 
 
 # 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/string" 1 3
@@ -27550,1894 +27519,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 54 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/string" 2 3
-# 40 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 2 3
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-
-
-  struct __cow_string
-  {
-    union {
-      const char* _M_p;
-      char _M_bytes[sizeof(const char*)];
-    };
-
-    __cow_string();
-    __cow_string(const std::string&);
-    __cow_string(const char*, size_t);
-    __cow_string(const __cow_string&) noexcept;
-    __cow_string& operator=(const __cow_string&) noexcept;
-    ~__cow_string();
-
-    __cow_string(__cow_string&&) noexcept;
-    __cow_string& operator=(__cow_string&&) noexcept;
-
-  };
-
-  typedef basic_string<char> __sso_string;
-# 113 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 3
-  class logic_error : public exception
-  {
-    __cow_string _M_msg;
-
-  public:
-
-    explicit
-    logic_error(const string& __arg) ;
-
-
-    explicit
-    logic_error(const char*) ;
-
-
-
-    logic_error(const logic_error&) noexcept;
-    logic_error& operator=(const logic_error&) noexcept;
-
-
-    virtual ~logic_error() noexcept;
-
-
-
-    virtual const char*
-    what() const noexcept;
-
-
-
-
-
-  };
-
-
-
-  class domain_error : public logic_error
-  {
-  public:
-    explicit domain_error(const string& __arg) ;
-
-    explicit domain_error(const char*) ;
-
-    virtual ~domain_error() noexcept;
-  };
-
-
-  class invalid_argument : public logic_error
-  {
-  public:
-    explicit invalid_argument(const string& __arg) ;
-
-    explicit invalid_argument(const char*) ;
-
-    virtual ~invalid_argument() noexcept;
-  };
-
-
-
-  class length_error : public logic_error
-  {
-  public:
-    explicit length_error(const string& __arg) ;
-
-    explicit length_error(const char*) ;
-
-    virtual ~length_error() noexcept;
-  };
-
-
-
-  class out_of_range : public logic_error
-  {
-  public:
-    explicit out_of_range(const string& __arg) ;
-
-    explicit out_of_range(const char*) ;
-
-    virtual ~out_of_range() noexcept;
-  };
-
-
-
-
-
-
-  class runtime_error : public exception
-  {
-    __cow_string _M_msg;
-
-  public:
-
-    explicit
-    runtime_error(const string& __arg) ;
-
-
-    explicit
-    runtime_error(const char*) ;
-
-
-
-    runtime_error(const runtime_error&) noexcept;
-    runtime_error& operator=(const runtime_error&) noexcept;
-
-
-    virtual ~runtime_error() noexcept;
-
-
-
-    virtual const char*
-    what() const noexcept;
-
-
-
-
-
-  };
-
-
-  class range_error : public runtime_error
-  {
-  public:
-    explicit range_error(const string& __arg) ;
-
-    explicit range_error(const char*) ;
-
-    virtual ~range_error() noexcept;
-  };
-
-
-  class overflow_error : public runtime_error
-  {
-  public:
-    explicit overflow_error(const string& __arg) ;
-
-    explicit overflow_error(const char*) ;
-
-    virtual ~overflow_error() noexcept;
-  };
-
-
-  class underflow_error : public runtime_error
-  {
-  public:
-    explicit underflow_error(const string& __arg) ;
-
-    explicit underflow_error(const char*) ;
-
-    virtual ~underflow_error() noexcept;
-  };
-
-
-
-
-}
-# 174 "/usr/include/soundtouch/STTypes.h" 2 3 4
-# 53 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
-
-
-namespace soundtouch
-{
-
-
-class FIFOSamplePipe
-{
-public:
-
-    virtual ~FIFOSamplePipe() {}
-# 73 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
-    virtual SAMPLETYPE *ptrBegin() = 0;
-
-
-
-    virtual void putSamples(const SAMPLETYPE *samples,
-                            uint numSamples
-                            ) = 0;
-
-
-
-    void moveSamples(FIFOSamplePipe &other
-         )
-    {
-        int oNumSamples = other.numSamples();
-
-        putSamples(other.ptrBegin(), oNumSamples);
-        other.receiveSamples(oNumSamples);
-    };
-
-
-
-
-
-
-    virtual uint receiveSamples(SAMPLETYPE *output,
-                                uint maxSamples
-                                ) = 0;
-
-
-
-
-
-
-    virtual uint receiveSamples(uint maxSamples
-                                ) = 0;
-
-
-    virtual uint numSamples() const = 0;
-
-
-    virtual int isEmpty() const = 0;
-
-
-    virtual void clear() = 0;
-
-
-
-    virtual uint adjustAmountOfSamples(uint numSamples) = 0;
-
-};
-# 134 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
-class FIFOProcessor :public FIFOSamplePipe
-{
-protected:
-
-    FIFOSamplePipe *output;
-
-
-    void setOutPipe(FIFOSamplePipe *pOutput)
-    {
-        (static_cast<void> (0));
-        (static_cast<void> (0));
-        output = pOutput;
-    }
-
-
-
-
-    FIFOProcessor()
-    {
-        output = __null;
-    }
-
-
-
-    FIFOProcessor(FIFOSamplePipe *pOutput
-                 )
-    {
-        output = pOutput;
-    }
-
-
-
-    virtual ~FIFOProcessor()
-    {
-    }
-# 178 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
-    virtual SAMPLETYPE *ptrBegin()
-    {
-        return output->ptrBegin();
-    }
-
-public:
-
-
-
-
-
-
-    virtual uint receiveSamples(SAMPLETYPE *outBuffer,
-                                uint maxSamples
-                                )
-    {
-        return output->receiveSamples(outBuffer, maxSamples);
-    }
-
-
-
-
-
-
-
-    virtual uint receiveSamples(uint maxSamples
-                                )
-    {
-        return output->receiveSamples(maxSamples);
-    }
-
-
-
-    virtual uint numSamples() const
-    {
-        return output->numSamples();
-    }
-
-
-
-    virtual int isEmpty() const
-    {
-        return output->isEmpty();
-    }
-
-
-
-    virtual uint adjustAmountOfSamples(uint numSamples)
-    {
-        return output->adjustAmountOfSamples(numSamples);
-    }
-
-};
-
-}
-# 75 "/usr/include/soundtouch/SoundTouch.h" 2 3 4
-
-
-
-namespace soundtouch
-{
-# 144 "/usr/include/soundtouch/SoundTouch.h" 3 4
-class SoundTouch : public FIFOProcessor
-{
-private:
-
-    class RateTransposer *pRateTransposer;
-
-
-    class TDStretch *pTDStretch;
-
-
-    double virtualRate;
-
-
-    double virtualTempo;
-
-
-    double virtualPitch;
-
-
-    bool bSrateSet;
-
-
-
-    double samplesExpectedOut;
-
-
-    long samplesOutput;
-
-
-
-    void calcEffectiveRateAndTempo();
-
-protected :
-
-    uint channels;
-
-
-    double rate;
-
-
-    double tempo;
-
-public:
-    SoundTouch();
-    virtual ~SoundTouch();
-
-
-    static const char *getVersionString();
-
-
-    static uint getVersionId();
-
-
-
-    void setRate(double newRate);
-
-
-
-    void setTempo(double newTempo);
-
-
-
-    void setRateChange(double newRate);
-
-
-
-    void setTempoChange(double newTempo);
-
-
-
-    void setPitch(double newPitch);
-
-
-
-    void setPitchOctaves(double newPitch);
-
-
-
-    void setPitchSemiTones(int newPitch);
-    void setPitchSemiTones(double newPitch);
-
-
-    void setChannels(uint numChannels);
-
-
-    void setSampleRate(uint srate);
-# 238 "/usr/include/soundtouch/SoundTouch.h" 3 4
-    void flush();
-
-
-
-
-    virtual void putSamples(
-            const SAMPLETYPE *samples,
-            uint numSamples
-
-
-            );
-
-
-
-
-
-
-    virtual uint receiveSamples(SAMPLETYPE *output,
-        uint maxSamples
-        );
-
-
-
-
-
-
-    virtual uint receiveSamples(uint maxSamples
-        );
-
-
-
-    virtual void clear();
-
-
-
-
-
-    bool setSetting(int settingId,
-                    int value
-                    );
-
-
-
-
-
-    int getSetting(int settingId
-                   ) const;
-
-
-    virtual uint numUnprocessedSamples() const;
-# 298 "/usr/include/soundtouch/SoundTouch.h" 3 4
-};
-
-}
-# 4 "/root/Bela/projects/MEng-Project/PitchShifter.h" 2
-
-# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/math.h" 1 3
-# 6 "/root/Bela/projects/MEng-Project/PitchShifter.h" 2
-
-class PitchShifter {
-public:
- void init(int sampleRate, int bufferLength);
- void readIn(float* audioBuffer);
- void shift(float currentF0, float shiftAmount);
- int readOut(float* audioBuffer);
-
-private:
- float frequnecyIntervalToSemitones(int currentF0, int newF0);
- soundtouch::SoundTouch pitchShifter;
- int sampleRate;
- int bufferLength;
-};
-# 10 "/root/Bela/projects/MEng-Project/render.cpp" 2
-# 1 "/root/Bela/projects/MEng-Project/PitchTracker.h" 1
-
-
-# 1 "/usr/include/aubio/aubio.h" 1 3 4
-# 158 "/usr/include/aubio/aubio.h" 3 4
-extern "C"
-{
-
-
-
-
-# 1 "/usr/include/aubio/types.h" 1 3 4
-# 31 "/usr/include/aubio/types.h" 3 4
-extern "C" {
-# 41 "/usr/include/aubio/types.h" 3 4
-typedef float smpl_t;
-# 51 "/usr/include/aubio/types.h" 3 4
-typedef double lsmp_t;
-# 60 "/usr/include/aubio/types.h" 3 4
-typedef unsigned int uint_t;
-
-typedef int sint_t;
-
-typedef char char_t;
-
-
-}
-# 164 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/fvec.h" 1 3 4
-# 25 "/usr/include/aubio/fvec.h" 3 4
-extern "C" {
-# 67 "/usr/include/aubio/fvec.h" 3 4
-typedef struct {
-  uint_t length;
-  smpl_t *data;
-} fvec_t;
-
-
-
-
-
-
-fvec_t * new_fvec(uint_t length);
-
-
-
-
-
-
-void del_fvec(fvec_t *s);
-
-
-
-
-
-
-
-smpl_t fvec_get_sample(const fvec_t *s, uint_t position);
-# 101 "/usr/include/aubio/fvec.h" 3 4
-void fvec_set_sample(fvec_t *s, smpl_t data, uint_t position);
-
-
-
-
-
-
-smpl_t * fvec_get_data(const fvec_t *s);
-
-
-
-
-
-
-void fvec_print(const fvec_t *s);
-
-
-
-
-
-
-
-void fvec_set_all (fvec_t *s, smpl_t val);
-
-
-
-
-
-
-void fvec_zeros(fvec_t *s);
-
-
-
-
-
-
-void fvec_ones(fvec_t *s);
-
-
-
-
-
-
-void fvec_rev(fvec_t *s);
-# 155 "/usr/include/aubio/fvec.h" 3 4
-void fvec_weight(fvec_t *s, const fvec_t *weight);
-
-
-
-
-
-
-
-void fvec_copy(const fvec_t *s, fvec_t *t);
-# 172 "/usr/include/aubio/fvec.h" 3 4
-void fvec_weighted_copy(const fvec_t *in, const fvec_t *weight, fvec_t *out);
-
-
-}
-# 165 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/cvec.h" 1 3 4
-# 25 "/usr/include/aubio/cvec.h" 3 4
-extern "C" {
-# 63 "/usr/include/aubio/cvec.h" 3 4
-typedef struct {
-  uint_t length;
-  smpl_t *norm;
-  smpl_t *phas;
-} cvec_t;
-# 80 "/usr/include/aubio/cvec.h" 3 4
-cvec_t * new_cvec(uint_t length);
-
-
-
-
-
-
-void del_cvec(cvec_t *s);
-# 101 "/usr/include/aubio/cvec.h" 3 4
-void cvec_norm_set_sample (cvec_t *s, smpl_t val, uint_t position);
-# 115 "/usr/include/aubio/cvec.h" 3 4
-void cvec_phas_set_sample (cvec_t *s, smpl_t val, uint_t position);
-# 128 "/usr/include/aubio/cvec.h" 3 4
-smpl_t cvec_norm_get_sample (cvec_t *s, uint_t position);
-# 142 "/usr/include/aubio/cvec.h" 3 4
-smpl_t cvec_phas_get_sample (cvec_t *s, uint_t position);
-# 153 "/usr/include/aubio/cvec.h" 3 4
-smpl_t * cvec_norm_get_data (const cvec_t *s);
-# 165 "/usr/include/aubio/cvec.h" 3 4
-smpl_t * cvec_phas_get_data (const cvec_t *s);
-
-
-
-
-
-
-void cvec_print(const cvec_t *s);
-
-
-
-
-
-
-
-void cvec_copy(const cvec_t *s, cvec_t *t);
-
-
-
-
-
-
-
-void cvec_norm_set_all (cvec_t *s, smpl_t val);
-
-
-
-
-
-
-void cvec_norm_zeros(cvec_t *s);
-
-
-
-
-
-
-void cvec_norm_ones(cvec_t *s);
-
-
-
-
-
-
-
-void cvec_phas_set_all (cvec_t *s, smpl_t val);
-
-
-
-
-
-
-void cvec_phas_zeros(cvec_t *s);
-
-
-
-
-
-
-void cvec_phas_ones(cvec_t *s);
-
-
-
-
-
-
-void cvec_zeros(cvec_t *s);
-
-
-}
-# 166 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/lvec.h" 1 3 4
-# 25 "/usr/include/aubio/lvec.h" 3 4
-extern "C" {
-# 43 "/usr/include/aubio/lvec.h" 3 4
-typedef struct {
-  uint_t length;
-  lsmp_t *data;
-} lvec_t;
-
-
-
-
-
-
-lvec_t * new_lvec(uint_t length);
-
-
-
-
-
-void del_lvec(lvec_t *s);
-
-
-
-
-
-
-
-lsmp_t lvec_get_sample(lvec_t *s, uint_t position);
-# 76 "/usr/include/aubio/lvec.h" 3 4
-void lvec_set_sample(lvec_t *s, lsmp_t data, uint_t position);
-
-
-
-
-
-
-lsmp_t * lvec_get_data(const lvec_t *s);
-
-
-
-
-
-
-void lvec_print(const lvec_t *s);
-
-
-
-
-
-
-
-void lvec_set_all(lvec_t *s, smpl_t val);
-
-
-
-
-
-
-void lvec_zeros(lvec_t *s);
-
-
-
-
-
-
-void lvec_ones(lvec_t *s);
-
-
-}
-# 167 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/fmat.h" 1 3 4
-# 25 "/usr/include/aubio/fmat.h" 3 4
-extern "C" {
-# 40 "/usr/include/aubio/fmat.h" 3 4
-typedef struct {
-  uint_t length;
-  uint_t height;
-  smpl_t **data;
-} fmat_t;
-
-
-
-
-
-
-
-fmat_t * new_fmat(uint_t height, uint_t length);
-
-
-
-
-
-
-void del_fmat(fmat_t *s);
-# 68 "/usr/include/aubio/fmat.h" 3 4
-smpl_t fmat_get_sample(const fmat_t *s, uint_t channel, uint_t position);
-# 78 "/usr/include/aubio/fmat.h" 3 4
-void fmat_set_sample(fmat_t *s, smpl_t data, uint_t channel, uint_t position);
-# 87 "/usr/include/aubio/fmat.h" 3 4
-void fmat_get_channel (const fmat_t *s, uint_t channel, fvec_t *output);
-
-
-
-
-
-
-
-smpl_t * fmat_get_channel_data (const fmat_t *s, uint_t channel);
-
-
-
-
-
-
-smpl_t ** fmat_get_data(const fmat_t *s);
-
-
-
-
-
-
-void fmat_print(const fmat_t *s);
-
-
-
-
-
-
-
-void fmat_set(fmat_t *s, smpl_t val);
-
-
-
-
-
-
-void fmat_zeros(fmat_t *s);
-
-
-
-
-
-
-void fmat_ones(fmat_t *s);
-
-
-
-
-
-
-void fmat_rev(fmat_t *s);
-# 149 "/usr/include/aubio/fmat.h" 3 4
-void fmat_weight(fmat_t *s, const fmat_t *weight);
-
-
-
-
-
-
-
-void fmat_copy(const fmat_t *s, fmat_t *t);
-# 166 "/usr/include/aubio/fmat.h" 3 4
-void fmat_vecmul(const fmat_t *s, const fvec_t *scale, fvec_t *output);
-
-
-}
-# 168 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/musicutils.h" 1 3 4
-# 29 "/usr/include/aubio/musicutils.h" 3 4
-extern "C" {
-# 38 "/usr/include/aubio/musicutils.h" 3 4
-fvec_t *new_aubio_window (char_t * window_type, uint_t size);
-# 63 "/usr/include/aubio/musicutils.h" 3 4
-uint_t fvec_set_window (fvec_t * window, char_t * window_type);
-# 75 "/usr/include/aubio/musicutils.h" 3 4
-smpl_t aubio_unwrap2pi (smpl_t phase);
-
-
-smpl_t aubio_bintomidi (smpl_t bin, smpl_t samplerate, smpl_t fftsize);
-
-
-smpl_t aubio_miditobin (smpl_t midi, smpl_t samplerate, smpl_t fftsize);
-
-
-smpl_t aubio_bintofreq (smpl_t bin, smpl_t samplerate, smpl_t fftsize);
-
-
-smpl_t aubio_freqtobin (smpl_t freq, smpl_t samplerate, smpl_t fftsize);
-
-
-smpl_t aubio_freqtomidi (smpl_t freq);
-
-
-smpl_t aubio_miditofreq (smpl_t midi);
-
-
-
-
-
-
-
-void aubio_cleanup (void);
-# 113 "/usr/include/aubio/musicutils.h" 3 4
-smpl_t aubio_zero_crossing_rate (fvec_t * v);
-# 124 "/usr/include/aubio/musicutils.h" 3 4
-smpl_t aubio_level_lin (const fvec_t * v);
-# 137 "/usr/include/aubio/musicutils.h" 3 4
-smpl_t aubio_db_spl (const fvec_t * v);
-# 147 "/usr/include/aubio/musicutils.h" 3 4
-uint_t aubio_silence_detection (const fvec_t * v, smpl_t threshold);
-# 157 "/usr/include/aubio/musicutils.h" 3 4
-smpl_t aubio_level_detection (const fvec_t * v, smpl_t threshold);
-
-
-}
-# 169 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/vecutils.h" 1 3 4
-# 31 "/usr/include/aubio/vecutils.h" 3 4
-extern "C" {
-
-
-
-
-
-
-
-void fvec_exp (fvec_t *s);
-
-
-
-
-
-
-void fvec_cos (fvec_t *s);
-
-
-
-
-
-
-void fvec_sin (fvec_t *s);
-
-
-
-
-
-
-void fvec_abs (fvec_t *s);
-
-
-
-
-
-
-void fvec_sqrt (fvec_t *s);
-
-
-
-
-
-
-void fvec_log10 (fvec_t *s);
-
-
-
-
-
-
-void fvec_log (fvec_t *s);
-
-
-
-
-
-
-void fvec_floor (fvec_t *s);
-
-
-
-
-
-
-void fvec_ceil (fvec_t *s);
-
-
-
-
-
-
-void fvec_round (fvec_t *s);
-
-
-
-
-
-
-
-void fvec_pow (fvec_t *s, smpl_t pow);
-
-
-}
-# 170 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/temporal/resampler.h" 1 3 4
-# 34 "/usr/include/aubio/temporal/resampler.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_resampler_t aubio_resampler_t;
-
-
-
-
-
-
-
-aubio_resampler_t *new_aubio_resampler (smpl_t ratio, uint_t type);
-
-
-void del_aubio_resampler (aubio_resampler_t * s);
-# 58 "/usr/include/aubio/temporal/resampler.h" 3 4
-void aubio_resampler_do (aubio_resampler_t * s, const fvec_t * input,
-    fvec_t * output);
-
-
-}
-# 171 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/temporal/filter.h" 1 3 4
-# 66 "/usr/include/aubio/temporal/filter.h" 3 4
-extern "C" {
-
-
-
-
-
-typedef struct _aubio_filter_t aubio_filter_t;
-
-
-
-
-
-
-
-void aubio_filter_do (aubio_filter_t * f, fvec_t * in);
-# 89 "/usr/include/aubio/temporal/filter.h" 3 4
-void aubio_filter_do_outplace (aubio_filter_t * f, const fvec_t * in, fvec_t * out);
-# 98 "/usr/include/aubio/temporal/filter.h" 3 4
-void aubio_filter_do_filtfilt (aubio_filter_t * f, fvec_t * in, fvec_t * tmp);
-# 107 "/usr/include/aubio/temporal/filter.h" 3 4
-lvec_t *aubio_filter_get_feedback (const aubio_filter_t * f);
-# 116 "/usr/include/aubio/temporal/filter.h" 3 4
-lvec_t *aubio_filter_get_feedforward (const aubio_filter_t * f);
-# 125 "/usr/include/aubio/temporal/filter.h" 3 4
-uint_t aubio_filter_get_order (const aubio_filter_t * f);
-# 134 "/usr/include/aubio/temporal/filter.h" 3 4
-uint_t aubio_filter_get_samplerate (const aubio_filter_t * f);
-# 144 "/usr/include/aubio/temporal/filter.h" 3 4
-uint_t aubio_filter_set_samplerate (aubio_filter_t * f, uint_t samplerate);
-
-
-
-
-
-
-void aubio_filter_do_reset (aubio_filter_t * f);
-# 163 "/usr/include/aubio/temporal/filter.h" 3 4
-aubio_filter_t *new_aubio_filter (uint_t order);
-
-
-
-
-
-
-void del_aubio_filter (aubio_filter_t * f);
-
-
-}
-# 172 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/temporal/biquad.h" 1 3 4
-# 43 "/usr/include/aubio/temporal/biquad.h" 3 4
-extern "C" {
-# 56 "/usr/include/aubio/temporal/biquad.h" 3 4
-uint_t aubio_filter_set_biquad (aubio_filter_t * f, lsmp_t b0, lsmp_t b1,
-    lsmp_t b2, lsmp_t a1, lsmp_t a2);
-# 68 "/usr/include/aubio/temporal/biquad.h" 3 4
-aubio_filter_t *new_aubio_filter_biquad (lsmp_t b0, lsmp_t b1, lsmp_t b2,
-    lsmp_t a1, lsmp_t a2);
-
-
-}
-# 173 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/temporal/a_weighting.h" 1 3 4
-# 60 "/usr/include/aubio/temporal/a_weighting.h" 3 4
-extern "C" {
-# 72 "/usr/include/aubio/temporal/a_weighting.h" 3 4
-aubio_filter_t *new_aubio_filter_a_weighting (uint_t samplerate);
-# 82 "/usr/include/aubio/temporal/a_weighting.h" 3 4
-uint_t aubio_filter_set_a_weighting (aubio_filter_t * f, uint_t samplerate);
-
-
-}
-# 174 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/temporal/c_weighting.h" 1 3 4
-# 60 "/usr/include/aubio/temporal/c_weighting.h" 3 4
-extern "C" {
-# 72 "/usr/include/aubio/temporal/c_weighting.h" 3 4
-aubio_filter_t *new_aubio_filter_c_weighting (uint_t samplerate);
-# 82 "/usr/include/aubio/temporal/c_weighting.h" 3 4
-uint_t aubio_filter_set_c_weighting (aubio_filter_t * f, uint_t samplerate);
-
-
-}
-# 175 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/fft.h" 1 3 4
-# 38 "/usr/include/aubio/spectral/fft.h" 3 4
-extern "C" {
-
-
-
-
-
-
-
-typedef struct _aubio_fft_t aubio_fft_t;
-
-
-
-
-
-
-aubio_fft_t * new_aubio_fft (uint_t size);
-
-
-
-
-
-void del_aubio_fft(aubio_fft_t * s);
-# 68 "/usr/include/aubio/spectral/fft.h" 3 4
-void aubio_fft_do (aubio_fft_t *s, const fvec_t * input, cvec_t * spectrum);
-
-
-
-
-
-
-
-void aubio_fft_rdo (aubio_fft_t *s, const cvec_t * spectrum, fvec_t * output);
-# 85 "/usr/include/aubio/spectral/fft.h" 3 4
-void aubio_fft_do_complex (aubio_fft_t *s, const fvec_t * input, fvec_t * compspec);
-
-
-
-
-
-
-
-void aubio_fft_rdo_complex (aubio_fft_t *s, const fvec_t * compspec, fvec_t * output);
-
-
-
-
-
-
-
-void aubio_fft_get_spectrum(const fvec_t * compspec, cvec_t * spectrum);
-
-
-
-
-
-
-void aubio_fft_get_realimag(const cvec_t * spectrum, fvec_t * compspec);
-
-
-
-
-
-
-
-void aubio_fft_get_phas(const fvec_t * compspec, cvec_t * spectrum);
-
-
-
-
-
-
-void aubio_fft_get_imag(const cvec_t * spectrum, fvec_t * compspec);
-
-
-
-
-
-
-
-void aubio_fft_get_norm(const fvec_t * compspec, cvec_t * spectrum);
-
-
-
-
-
-
-void aubio_fft_get_real(const cvec_t * spectrum, fvec_t * compspec);
-
-
-}
-# 176 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/phasevoc.h" 1 3 4
-# 38 "/usr/include/aubio/spectral/phasevoc.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_pvoc_t aubio_pvoc_t;
-
-
-
-
-
-
-
-aubio_pvoc_t * new_aubio_pvoc (uint_t win_s, uint_t hop_s);
-
-
-
-
-
-void del_aubio_pvoc(aubio_pvoc_t *pv);
-# 70 "/usr/include/aubio/spectral/phasevoc.h" 3 4
-void aubio_pvoc_do(aubio_pvoc_t *pv, const fvec_t *in, cvec_t * fftgrain);
-# 83 "/usr/include/aubio/spectral/phasevoc.h" 3 4
-void aubio_pvoc_rdo(aubio_pvoc_t *pv, cvec_t * fftgrain, fvec_t *out);
-
-
-
-
-
-
-uint_t aubio_pvoc_get_win(aubio_pvoc_t* pv);
-
-
-
-
-
-uint_t aubio_pvoc_get_hop(aubio_pvoc_t* pv);
-
-
-}
-# 177 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/filterbank.h" 1 3 4
-# 36 "/usr/include/aubio/spectral/filterbank.h" 3 4
-extern "C"
-{
-
-
-
-
-
-
-
-typedef struct _aubio_filterbank_t aubio_filterbank_t;
-
-
-
-
-
-
-
-aubio_filterbank_t *new_aubio_filterbank (uint_t n_filters, uint_t win_s);
-
-
-
-
-
-
-void del_aubio_filterbank (aubio_filterbank_t * f);
-# 69 "/usr/include/aubio/spectral/filterbank.h" 3 4
-void aubio_filterbank_do (aubio_filterbank_t * f, const cvec_t * in, fvec_t * out);
-
-
-
-
-
-
-fmat_t *aubio_filterbank_get_coeffs (const aubio_filterbank_t * f);
-
-
-
-
-
-
-
-uint_t aubio_filterbank_set_coeffs (aubio_filterbank_t * f, const fmat_t * filters);
-
-
-}
-# 178 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/filterbank_mel.h" 1 3 4
-# 38 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
-extern "C"
-{
-# 52 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
-uint_t aubio_filterbank_set_triangle_bands (aubio_filterbank_t * fb,
-    const fvec_t * freqs, smpl_t samplerate);
-# 65 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
-uint_t aubio_filterbank_set_mel_coeffs_slaney (aubio_filterbank_t * fb,
-    smpl_t samplerate);
-
-
-}
-# 179 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/mfcc.h" 1 3 4
-# 41 "/usr/include/aubio/spectral/mfcc.h" 3 4
-extern "C"
-{
-
-
-
-typedef struct _aubio_mfcc_t aubio_mfcc_t;
-# 56 "/usr/include/aubio/spectral/mfcc.h" 3 4
-aubio_mfcc_t *new_aubio_mfcc (uint_t buf_size,
-    uint_t n_filters, uint_t n_coeffs, uint_t samplerate);
-
-
-
-
-
-
-void del_aubio_mfcc (aubio_mfcc_t * mf);
-# 73 "/usr/include/aubio/spectral/mfcc.h" 3 4
-void aubio_mfcc_do (aubio_mfcc_t * mf, const cvec_t * in, fvec_t * out);
-
-
-}
-# 180 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/specdesc.h" 1 3 4
-# 152 "/usr/include/aubio/spectral/specdesc.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_specdesc_t aubio_specdesc_t;
-# 167 "/usr/include/aubio/spectral/specdesc.h" 3 4
-void aubio_specdesc_do (aubio_specdesc_t * o, const cvec_t * fftgrain,
-    fvec_t * desc);
-# 181 "/usr/include/aubio/spectral/specdesc.h" 3 4
-aubio_specdesc_t *new_aubio_specdesc (const char_t * method, uint_t buf_size);
-
-
-
-
-
-
-void del_aubio_specdesc (aubio_specdesc_t * o);
-
-
-}
-# 181 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/spectral/tss.h" 1 3 4
-# 43 "/usr/include/aubio/spectral/tss.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_tss_t aubio_tss_t;
-
-
-
-
-
-
-
-aubio_tss_t *new_aubio_tss (uint_t buf_size, uint_t hop_size);
-
-
-
-
-
-
-void del_aubio_tss (aubio_tss_t * o);
-# 72 "/usr/include/aubio/spectral/tss.h" 3 4
-void aubio_tss_do (aubio_tss_t * o, const cvec_t * input, cvec_t * trans,
-    cvec_t * stead);
-
-
-
-
-
-
-
-uint_t aubio_tss_set_threshold (aubio_tss_t * o, smpl_t thrs);
-
-
-
-
-
-
-
-uint_t aubio_tss_set_alpha (aubio_tss_t * o, smpl_t alpha);
-
-
-
-
-
-
-
-uint_t aubio_tss_set_beta (aubio_tss_t * o, smpl_t beta);
-
-
-}
-# 182 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/pitch/pitch.h" 1 3 4
-# 25 "/usr/include/aubio/pitch/pitch.h" 3 4
-extern "C" {
-# 101 "/usr/include/aubio/pitch/pitch.h" 3 4
-typedef struct _aubio_pitch_t aubio_pitch_t;
-# 110 "/usr/include/aubio/pitch/pitch.h" 3 4
-void aubio_pitch_do (aubio_pitch_t * o, const fvec_t * in, fvec_t * out);
-
-
-
-
-
-
-
-uint_t aubio_pitch_set_tolerance (aubio_pitch_t * o, smpl_t tol);
-
-
-
-
-
-
-void del_aubio_pitch (aubio_pitch_t * o);
-# 137 "/usr/include/aubio/pitch/pitch.h" 3 4
-aubio_pitch_t *new_aubio_pitch (const char_t * method,
-    uint_t buf_size, uint_t hop_size, uint_t samplerate);
-# 148 "/usr/include/aubio/pitch/pitch.h" 3 4
-uint_t aubio_pitch_set_unit (aubio_pitch_t * o, const char_t * mode);
-# 158 "/usr/include/aubio/pitch/pitch.h" 3 4
-uint_t aubio_pitch_set_silence (aubio_pitch_t * o, smpl_t silence);
-# 167 "/usr/include/aubio/pitch/pitch.h" 3 4
-smpl_t aubio_pitch_get_silence (aubio_pitch_t * o);
-# 176 "/usr/include/aubio/pitch/pitch.h" 3 4
-smpl_t aubio_pitch_get_confidence (aubio_pitch_t * o);
-
-
-}
-# 183 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/onset/onset.h" 1 3 4
-# 46 "/usr/include/aubio/onset/onset.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_onset_t aubio_onset_t;
-# 62 "/usr/include/aubio/onset/onset.h" 3 4
-aubio_onset_t * new_aubio_onset (const char_t * method,
-    uint_t buf_size, uint_t hop_size, uint_t samplerate);
-# 91 "/usr/include/aubio/onset/onset.h" 3 4
-void aubio_onset_do (aubio_onset_t *o, const fvec_t * input, fvec_t * onset);
-# 100 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_get_last (const aubio_onset_t *o);
-# 109 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_last_s (const aubio_onset_t *o);
-# 118 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_last_ms (const aubio_onset_t *o);
-
-
-
-
-
-
-
-uint_t aubio_onset_set_silence(aubio_onset_t * o, smpl_t silence);
-# 135 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_silence(const aubio_onset_t * o);
-
-
-
-
-
-
-
-smpl_t aubio_onset_get_descriptor (const aubio_onset_t *o);
-
-
-
-
-
-
-
-smpl_t aubio_onset_get_thresholded_descriptor (const aubio_onset_t *o);
-
-
-
-
-
-
-
-uint_t aubio_onset_set_threshold(aubio_onset_t * o, smpl_t threshold);
-# 168 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_minioi(aubio_onset_t * o, uint_t minioi);
-# 177 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_minioi_s(aubio_onset_t * o, smpl_t minioi);
-# 186 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_minioi_ms(aubio_onset_t * o, smpl_t minioi);
-# 195 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_delay(aubio_onset_t * o, uint_t delay);
-# 204 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_delay_s(aubio_onset_t * o, smpl_t delay);
-# 213 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_set_delay_ms(aubio_onset_t * o, smpl_t delay);
-# 222 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_get_minioi(const aubio_onset_t * o);
-# 231 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_minioi_s(const aubio_onset_t * o);
-# 240 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_minioi_ms(const aubio_onset_t * o);
-# 249 "/usr/include/aubio/onset/onset.h" 3 4
-uint_t aubio_onset_get_delay(const aubio_onset_t * o);
-# 258 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_delay_s(const aubio_onset_t * o);
-# 267 "/usr/include/aubio/onset/onset.h" 3 4
-smpl_t aubio_onset_get_delay_ms(const aubio_onset_t * o);
-
-
-
-
-
-
-
-smpl_t aubio_onset_get_threshold(const aubio_onset_t * o);
-
-
-
-
-
-
-void del_aubio_onset(aubio_onset_t * o);
-
-
-}
-# 184 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/tempo/tempo.h" 1 3 4
-# 37 "/usr/include/aubio/tempo/tempo.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_tempo_t aubio_tempo_t;
-# 53 "/usr/include/aubio/tempo/tempo.h" 3 4
-aubio_tempo_t * new_aubio_tempo (const char_t * method,
-    uint_t buf_size, uint_t hop_size, uint_t samplerate);
-# 63 "/usr/include/aubio/tempo/tempo.h" 3 4
-void aubio_tempo_do (aubio_tempo_t *o, const fvec_t * input, fvec_t * tempo);
-
-
-
-
-
-
-uint_t aubio_tempo_get_last (aubio_tempo_t *o);
-
-
-
-
-
-
-smpl_t aubio_tempo_get_last_s (aubio_tempo_t *o);
-
-
-
-
-
-
-smpl_t aubio_tempo_get_last_ms (aubio_tempo_t *o);
-# 94 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_set_silence(aubio_tempo_t * o, smpl_t silence);
-# 103 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_silence(aubio_tempo_t * o);
-# 113 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_set_threshold(aubio_tempo_t * o, smpl_t threshold);
-# 122 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_threshold(aubio_tempo_t * o);
-# 132 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_period (aubio_tempo_t * bt);
-# 142 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_period_s (aubio_tempo_t * bt);
-# 151 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_bpm(aubio_tempo_t * o);
-# 161 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_confidence(aubio_tempo_t * o);
-
-
-
-
-
-
-
-uint_t aubio_tempo_set_tatum_signature(aubio_tempo_t *o, uint_t signature);
-# 178 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_was_tatum(aubio_tempo_t *o);
-
-
-
-
-
-
-smpl_t aubio_tempo_get_last_tatum(aubio_tempo_t *o);
-# 194 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_get_delay(aubio_tempo_t * o);
-# 203 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_delay_s(aubio_tempo_t * o);
-# 212 "/usr/include/aubio/tempo/tempo.h" 3 4
-smpl_t aubio_tempo_get_delay_ms(aubio_tempo_t * o);
-# 222 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_set_delay(aubio_tempo_t * o, sint_t delay);
-# 232 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_set_delay_s(aubio_tempo_t * o, smpl_t delay);
-# 242 "/usr/include/aubio/tempo/tempo.h" 3 4
-uint_t aubio_tempo_set_delay_ms(aubio_tempo_t * o, smpl_t delay);
-
-
-
-
-
-
-void del_aubio_tempo(aubio_tempo_t * o);
-
-
-}
-# 185 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/notes/notes.h" 1 3 4
-# 25 "/usr/include/aubio/notes/notes.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_notes_t aubio_notes_t;
-# 41 "/usr/include/aubio/notes/notes.h" 3 4
-aubio_notes_t * new_aubio_notes (const char_t * method,
-    uint_t buf_size, uint_t hop_size, uint_t samplerate);
-
-
-
-
-
-
-void del_aubio_notes(aubio_notes_t * o);
-# 58 "/usr/include/aubio/notes/notes.h" 3 4
-void aubio_notes_do (aubio_notes_t *o, const fvec_t * input, fvec_t * output);
-
-
-}
-# 186 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/io/source.h" 1 3 4
-# 67 "/usr/include/aubio/io/source.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_source_t aubio_source_t;
-# 88 "/usr/include/aubio/io/source.h" 3 4
-aubio_source_t * new_aubio_source(const char_t * uri, uint_t samplerate, uint_t hop_size);
-# 102 "/usr/include/aubio/io/source.h" 3 4
-void aubio_source_do(aubio_source_t * s, fvec_t * read_to, uint_t * read);
-# 116 "/usr/include/aubio/io/source.h" 3 4
-void aubio_source_do_multi(aubio_source_t * s, fmat_t * read_to, uint_t * read);
-# 126 "/usr/include/aubio/io/source.h" 3 4
-uint_t aubio_source_get_samplerate(aubio_source_t * s);
-# 136 "/usr/include/aubio/io/source.h" 3 4
-uint_t aubio_source_get_channels (aubio_source_t * s);
-# 148 "/usr/include/aubio/io/source.h" 3 4
-uint_t aubio_source_seek (aubio_source_t * s, uint_t pos);
-# 158 "/usr/include/aubio/io/source.h" 3 4
-uint_t aubio_source_get_duration (aubio_source_t * s);
-# 169 "/usr/include/aubio/io/source.h" 3 4
-uint_t aubio_source_close (aubio_source_t *s);
-# 178 "/usr/include/aubio/io/source.h" 3 4
-void del_aubio_source(aubio_source_t * s);
-
-
-}
-# 187 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/io/sink.h" 1 3 4
-# 57 "/usr/include/aubio/io/sink.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_sink_t aubio_sink_t;
-# 79 "/usr/include/aubio/io/sink.h" 3 4
-aubio_sink_t * new_aubio_sink(const char_t * uri, uint_t samplerate);
-# 96 "/usr/include/aubio/io/sink.h" 3 4
-uint_t aubio_sink_preset_samplerate(aubio_sink_t *s, uint_t samplerate);
-# 113 "/usr/include/aubio/io/sink.h" 3 4
-uint_t aubio_sink_preset_channels(aubio_sink_t *s, uint_t channels);
-# 123 "/usr/include/aubio/io/sink.h" 3 4
-uint_t aubio_sink_get_samplerate(const aubio_sink_t *s);
-# 133 "/usr/include/aubio/io/sink.h" 3 4
-uint_t aubio_sink_get_channels(const aubio_sink_t *s);
-# 144 "/usr/include/aubio/io/sink.h" 3 4
-void aubio_sink_do(aubio_sink_t * s, fvec_t * write_data, uint_t write);
-# 155 "/usr/include/aubio/io/sink.h" 3 4
-void aubio_sink_do_multi(aubio_sink_t * s, fmat_t * write_data, uint_t write);
-# 166 "/usr/include/aubio/io/sink.h" 3 4
-uint_t aubio_sink_close(aubio_sink_t * s);
-# 175 "/usr/include/aubio/io/sink.h" 3 4
-void del_aubio_sink(aubio_sink_t * s);
-
-
-}
-# 188 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/synth/sampler.h" 1 3 4
-# 38 "/usr/include/aubio/synth/sampler.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_sampler_t aubio_sampler_t;
-# 52 "/usr/include/aubio/synth/sampler.h" 3 4
-aubio_sampler_t * new_aubio_sampler(uint_t samplerate, uint_t hop_size);
-# 62 "/usr/include/aubio/synth/sampler.h" 3 4
-uint_t aubio_sampler_load( aubio_sampler_t * o, const char_t * uri );
-# 76 "/usr/include/aubio/synth/sampler.h" 3 4
-void aubio_sampler_do ( aubio_sampler_t * o, const fvec_t * input, fvec_t * output);
-# 90 "/usr/include/aubio/synth/sampler.h" 3 4
-void aubio_sampler_do_multi ( aubio_sampler_t * o, const fmat_t * input, fmat_t * output);
-# 99 "/usr/include/aubio/synth/sampler.h" 3 4
-uint_t aubio_sampler_get_playing ( const aubio_sampler_t * o );
-# 109 "/usr/include/aubio/synth/sampler.h" 3 4
-uint_t aubio_sampler_set_playing ( aubio_sampler_t * o, uint_t playing );
-# 118 "/usr/include/aubio/synth/sampler.h" 3 4
-uint_t aubio_sampler_play ( aubio_sampler_t * o );
-# 127 "/usr/include/aubio/synth/sampler.h" 3 4
-uint_t aubio_sampler_stop ( aubio_sampler_t * o );
-
-
-
-
-
-
-void del_aubio_sampler( aubio_sampler_t * o );
-
-
-}
-# 189 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/synth/wavetable.h" 1 3 4
-# 38 "/usr/include/aubio/synth/wavetable.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_wavetable_t aubio_wavetable_t;
-# 52 "/usr/include/aubio/synth/wavetable.h" 3 4
-aubio_wavetable_t * new_aubio_wavetable(uint_t samplerate, uint_t hop_size);
-# 62 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_load( aubio_wavetable_t * o, const char_t * uri );
-# 76 "/usr/include/aubio/synth/wavetable.h" 3 4
-void aubio_wavetable_do ( aubio_wavetable_t * o, const fvec_t * input, fvec_t * output);
-# 90 "/usr/include/aubio/synth/wavetable.h" 3 4
-void aubio_wavetable_do_multi ( aubio_wavetable_t * o, const fmat_t * input, fmat_t * output);
-# 99 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_get_playing ( const aubio_wavetable_t * o );
-# 109 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_set_playing ( aubio_wavetable_t * o, uint_t playing );
-# 118 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_play ( aubio_wavetable_t * o );
-# 127 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_stop ( aubio_wavetable_t * o );
-# 137 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_set_freq ( aubio_wavetable_t * o, smpl_t freq );
-# 146 "/usr/include/aubio/synth/wavetable.h" 3 4
-smpl_t aubio_wavetable_get_freq ( const aubio_wavetable_t * o);
-# 156 "/usr/include/aubio/synth/wavetable.h" 3 4
-uint_t aubio_wavetable_set_amp ( aubio_wavetable_t * o, smpl_t amp );
-# 165 "/usr/include/aubio/synth/wavetable.h" 3 4
-smpl_t aubio_wavetable_get_amp ( const aubio_wavetable_t * o);
-
-
-
-
-
-
-void del_aubio_wavetable( aubio_wavetable_t * o );
-
-
-}
-# 190 "/usr/include/aubio/aubio.h" 2 3 4
-# 1 "/usr/include/aubio/utils/parameter.h" 1 3 4
-# 36 "/usr/include/aubio/utils/parameter.h" 3 4
-extern "C" {
-
-
-
-typedef struct _aubio_parameter_t aubio_parameter_t;
-# 51 "/usr/include/aubio/utils/parameter.h" 3 4
-aubio_parameter_t * new_aubio_parameter(smpl_t min_value, smpl_t max_value, uint_t steps);
-# 61 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_set_target_value ( aubio_parameter_t * param, smpl_t value );
-# 70 "/usr/include/aubio/utils/parameter.h" 3 4
-smpl_t aubio_parameter_get_next_value ( aubio_parameter_t * param );
-# 79 "/usr/include/aubio/utils/parameter.h" 3 4
-smpl_t aubio_parameter_get_current_value ( const aubio_parameter_t * param );
-# 89 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_set_current_value ( aubio_parameter_t * param, smpl_t value );
-# 99 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_set_steps ( aubio_parameter_t * param, uint_t steps );
-# 108 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_get_steps ( const aubio_parameter_t * param);
-# 118 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_set_min_value ( aubio_parameter_t * param, smpl_t min_value );
-# 127 "/usr/include/aubio/utils/parameter.h" 3 4
-smpl_t aubio_parameter_get_min_value ( const aubio_parameter_t * param );
-# 137 "/usr/include/aubio/utils/parameter.h" 3 4
-uint_t aubio_parameter_set_max_value ( aubio_parameter_t * param, smpl_t max_value );
-# 146 "/usr/include/aubio/utils/parameter.h" 3 4
-smpl_t aubio_parameter_get_max_value ( const aubio_parameter_t * param );
-
-
-
-
-
-
-void del_aubio_parameter( aubio_parameter_t * param );
-
-
-}
-# 191 "/usr/include/aubio/aubio.h" 2 3 4
-# 215 "/usr/include/aubio/aubio.h" 3 4
-}
-# 4 "/root/Bela/projects/MEng-Project/PitchTracker.h" 2
-
-
-
-class PitchTracker {
-public:
- void init(char* pitchMethod, int bufferSize, int samplerate);
- int getPitch(float* audioBuffer);
-
-private:
- aubio_pitch_t *pitchDetector;
- fvec_t *pitchBuffer;
- fvec_t* fvecAudioBuffer;
- int bufferSize;
-};
-# 11 "/root/Bela/projects/MEng-Project/render.cpp" 2
-# 1 "/root/Bela/projects/MEng-Project/Reverberator.h" 1
-
-
-# 1 "/usr/local/include/stk/FreeVerb.h" 1 3
-
-
-
-# 1 "/usr/local/include/stk/Effect.h" 1 3
-
-
-
-# 1 "/usr/local/include/stk/Stk.h" 1 3
-
-
-
-
+# 5 "/usr/local/include/stk/Stk.h" 2 3
 # 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/cstring" 1 3
 # 40 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/cstring" 3
 # 71 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/cstring" 3
@@ -30425,7 +28507,194 @@ namespace std __attribute__ ((__visibility__ ("default")))
 }
 # 40 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/system_error" 2 3
 
+# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 1 3
+# 37 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 3
 
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+  struct __cow_string
+  {
+    union {
+      const char* _M_p;
+      char _M_bytes[sizeof(const char*)];
+    };
+
+    __cow_string();
+    __cow_string(const std::string&);
+    __cow_string(const char*, size_t);
+    __cow_string(const __cow_string&) noexcept;
+    __cow_string& operator=(const __cow_string&) noexcept;
+    ~__cow_string();
+
+    __cow_string(__cow_string&&) noexcept;
+    __cow_string& operator=(__cow_string&&) noexcept;
+
+  };
+
+  typedef basic_string<char> __sso_string;
+# 113 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdexcept" 3
+  class logic_error : public exception
+  {
+    __cow_string _M_msg;
+
+  public:
+
+    explicit
+    logic_error(const string& __arg) ;
+
+
+    explicit
+    logic_error(const char*) ;
+
+
+
+    logic_error(const logic_error&) noexcept;
+    logic_error& operator=(const logic_error&) noexcept;
+
+
+    virtual ~logic_error() noexcept;
+
+
+
+    virtual const char*
+    what() const noexcept;
+
+
+
+
+
+  };
+
+
+
+  class domain_error : public logic_error
+  {
+  public:
+    explicit domain_error(const string& __arg) ;
+
+    explicit domain_error(const char*) ;
+
+    virtual ~domain_error() noexcept;
+  };
+
+
+  class invalid_argument : public logic_error
+  {
+  public:
+    explicit invalid_argument(const string& __arg) ;
+
+    explicit invalid_argument(const char*) ;
+
+    virtual ~invalid_argument() noexcept;
+  };
+
+
+
+  class length_error : public logic_error
+  {
+  public:
+    explicit length_error(const string& __arg) ;
+
+    explicit length_error(const char*) ;
+
+    virtual ~length_error() noexcept;
+  };
+
+
+
+  class out_of_range : public logic_error
+  {
+  public:
+    explicit out_of_range(const string& __arg) ;
+
+    explicit out_of_range(const char*) ;
+
+    virtual ~out_of_range() noexcept;
+  };
+
+
+
+
+
+
+  class runtime_error : public exception
+  {
+    __cow_string _M_msg;
+
+  public:
+
+    explicit
+    runtime_error(const string& __arg) ;
+
+
+    explicit
+    runtime_error(const char*) ;
+
+
+
+    runtime_error(const runtime_error&) noexcept;
+    runtime_error& operator=(const runtime_error&) noexcept;
+
+
+    virtual ~runtime_error() noexcept;
+
+
+
+    virtual const char*
+    what() const noexcept;
+
+
+
+
+
+  };
+
+
+  class range_error : public runtime_error
+  {
+  public:
+    explicit range_error(const string& __arg) ;
+
+    explicit range_error(const char*) ;
+
+    virtual ~range_error() noexcept;
+  };
+
+
+  class overflow_error : public runtime_error
+  {
+  public:
+    explicit overflow_error(const string& __arg) ;
+
+    explicit overflow_error(const char*) ;
+
+    virtual ~overflow_error() noexcept;
+  };
+
+
+  class underflow_error : public runtime_error
+  {
+  public:
+    explicit underflow_error(const string& __arg) ;
+
+    explicit underflow_error(const char*) ;
+
+    virtual ~underflow_error() noexcept;
+  };
+
+
+
+
+}
+# 42 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/system_error" 2 3
 
 namespace std __attribute__ ((__visibility__ ("default")))
 {
@@ -39143,8 +37412,8 @@ inline bool Effect :: isPrime( unsigned int number )
 }
 
 }
-# 5 "/usr/local/include/stk/FreeVerb.h" 2 3
-# 1 "/usr/local/include/stk/Delay.h" 1 3
+# 5 "/usr/local/include/stk/PitShift.h" 2 3
+# 1 "/usr/local/include/stk/DelayL.h" 1 3
 
 
 
@@ -39252,7 +37521,2004 @@ inline StkFloat Filter :: phaseDelay( StkFloat frequency )
 }
 
 }
-# 5 "/usr/local/include/stk/Delay.h" 2 3
+# 5 "/usr/local/include/stk/DelayL.h" 2 3
+
+namespace stk {
+# 27 "/usr/local/include/stk/DelayL.h" 3
+class DelayL : public Filter
+{
+public:
+
+
+
+
+
+
+
+  DelayL( StkFloat delay = 0.0, unsigned long maxDelay = 4095 );
+
+
+  ~DelayL();
+
+
+  unsigned long getMaximumDelay( void ) { return inputs_.size() - 1; };
+# 53 "/usr/local/include/stk/DelayL.h" 3
+  void setMaximumDelay( unsigned long delay );
+
+
+
+
+
+  void setDelay( StkFloat delay );
+
+
+  StkFloat getDelay( void ) const { return delay_; };
+
+
+
+
+
+
+
+  StkFloat tapOut( unsigned long tapDelay );
+
+
+  void tapIn( StkFloat value, unsigned long tapDelay );
+
+
+  StkFloat lastOut( void ) const { return lastFrame_[0]; };
+
+
+
+
+
+  StkFloat nextOut( void );
+
+
+  StkFloat tick( StkFloat input );
+# 96 "/usr/local/include/stk/DelayL.h" 3
+  StkFrames& tick( StkFrames& frames, unsigned int channel = 0 );
+# 107 "/usr/local/include/stk/DelayL.h" 3
+  StkFrames& tick( StkFrames& iFrames, StkFrames &oFrames, unsigned int iChannel = 0, unsigned int oChannel = 0 );
+
+ protected:
+
+  unsigned long inPoint_;
+  unsigned long outPoint_;
+  StkFloat delay_;
+  StkFloat alpha_;
+  StkFloat omAlpha_;
+  StkFloat nextOutput_;
+  bool doNextOut_;
+};
+
+inline StkFloat DelayL :: nextOut( void )
+{
+  if ( doNextOut_ ) {
+
+    nextOutput_ = inputs_[outPoint_] * omAlpha_;
+
+    if (outPoint_+1 < inputs_.size())
+      nextOutput_ += inputs_[outPoint_+1] * alpha_;
+    else
+      nextOutput_ += inputs_[0] * alpha_;
+    doNextOut_ = false;
+  }
+
+  return nextOutput_;
+}
+
+inline void DelayL :: setDelay( StkFloat delay )
+{
+  if ( delay + 1 > inputs_.size() ) {
+    oStream_ << "DelayL::setDelay: argument (" << delay << ") greater than  maximum!";
+    handleError( StkError::WARNING ); return;
+  }
+
+  if (delay < 0 ) {
+    oStream_ << "DelayL::setDelay: argument (" << delay << ") less than zero!";
+    handleError( StkError::WARNING ); return;
+  }
+
+  StkFloat outPointer = inPoint_ - delay;
+  delay_ = delay;
+
+  while ( outPointer < 0 )
+    outPointer += inputs_.size();
+
+  outPoint_ = (long) outPointer;
+
+  alpha_ = outPointer - outPoint_;
+  omAlpha_ = (StkFloat) 1.0 - alpha_;
+
+  if ( outPoint_ == inputs_.size() ) outPoint_ = 0;
+  doNextOut_ = true;
+}
+
+inline StkFloat DelayL :: tick( StkFloat input )
+{
+  inputs_[inPoint_++] = input * gain_;
+
+
+  if ( inPoint_ == inputs_.size() )
+    inPoint_ = 0;
+
+  lastFrame_[0] = nextOut();
+  doNextOut_ = true;
+
+
+  if ( ++outPoint_ == inputs_.size() )
+    outPoint_ = 0;
+
+  return lastFrame_[0];
+}
+
+inline StkFrames& DelayL :: tick( StkFrames& frames, unsigned int channel )
+{
+
+
+
+
+
+
+
+  StkFloat *samples = &frames[channel];
+  unsigned int hop = frames.channels();
+  for ( unsigned int i=0; i<frames.frames(); i++, samples += hop ) {
+    inputs_[inPoint_++] = *samples * gain_;
+    if ( inPoint_ == inputs_.size() ) inPoint_ = 0;
+    *samples = nextOut();
+    doNextOut_ = true;
+    if ( ++outPoint_ == inputs_.size() ) outPoint_ = 0;
+  }
+
+  lastFrame_[0] = *(samples-hop);
+  return frames;
+}
+
+inline StkFrames& DelayL :: tick( StkFrames& iFrames, StkFrames& oFrames, unsigned int iChannel, unsigned int oChannel )
+{
+
+
+
+
+
+
+
+  StkFloat *iSamples = &iFrames[iChannel];
+  StkFloat *oSamples = &oFrames[oChannel];
+  unsigned int iHop = iFrames.channels(), oHop = oFrames.channels();
+  for ( unsigned int i=0; i<iFrames.frames(); i++, iSamples += iHop, oSamples += oHop ) {
+    inputs_[inPoint_++] = *iSamples * gain_;
+    if ( inPoint_ == inputs_.size() ) inPoint_ = 0;
+    *oSamples = nextOut();
+    doNextOut_ = true;
+    if ( ++outPoint_ == inputs_.size() ) outPoint_ = 0;
+  }
+
+  lastFrame_[0] = *(oSamples-oHop);
+  return iFrames;
+}
+
+}
+# 6 "/usr/local/include/stk/PitShift.h" 2 3
+
+namespace stk {
+# 20 "/usr/local/include/stk/PitShift.h" 3
+const int maxDelay = 5024;
+
+class PitShift : public Effect
+{
+ public:
+
+  PitShift( void );
+
+
+  void clear( void );
+
+
+  void setShift( StkFloat shift );
+
+
+  StkFloat lastOut( void ) const { return lastFrame_[0]; };
+
+
+  StkFloat tick( StkFloat input );
+# 49 "/usr/local/include/stk/PitShift.h" 3
+  StkFrames& tick( StkFrames& frames, unsigned int channel = 0 );
+# 60 "/usr/local/include/stk/PitShift.h" 3
+  StkFrames& tick( StkFrames& iFrames, StkFrames &oFrames, unsigned int iChannel = 0, unsigned int oChannel = 0 );
+
+ protected:
+
+  DelayL delayLine_[2];
+  StkFloat delay_[2];
+  StkFloat env_[2];
+  StkFloat rate_;
+  unsigned long delayLength_;
+  unsigned long halfLength_;
+
+};
+
+inline StkFloat PitShift :: tick( StkFloat input )
+{
+
+
+  delay_[0] += rate_;
+  while ( delay_[0] > maxDelay-12 ) delay_[0] -= delayLength_;
+  while ( delay_[0] < 12 ) delay_[0] += delayLength_;
+
+  delay_[1] = delay_[0] + halfLength_;
+  while ( delay_[1] > maxDelay-12 ) delay_[1] -= delayLength_;
+  while ( delay_[1] < 12 ) delay_[1] += delayLength_;
+
+
+  delayLine_[0].setDelay( delay_[0] );
+  delayLine_[1].setDelay( delay_[1] );
+
+
+  env_[1] = fabs( ( delay_[0] - halfLength_ + 12 ) * ( 1.0 / (halfLength_ + 12 ) ) );
+  env_[0] = 1.0 - env_[1];
+
+
+  lastFrame_[0] = env_[0] * delayLine_[0].tick( input );
+  lastFrame_[0] += env_[1] * delayLine_[1].tick( input );
+
+
+  lastFrame_[0] *= effectMix_;
+  lastFrame_[0] += ( 1.0 - effectMix_ ) * input;
+
+  return lastFrame_[0];
+}
+
+}
+# 4 "/root/Bela/projects/MEng-Project/PitchShifter.h" 2
+# 1 "/usr/include/soundtouch/SoundTouch.h" 1 3 4
+# 75 "/usr/include/soundtouch/SoundTouch.h" 3 4
+# 1 "/usr/include/soundtouch/FIFOSamplePipe.h" 1 3 4
+# 51 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
+# 1 "/usr/include/assert.h" 1 3 4
+# 51 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
+
+# 1 "/usr/xenomai/include/cobalt/stdlib.h" 1 3 4
+# 19 "/usr/xenomai/include/cobalt/stdlib.h" 3
+# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/stdlib.h" 1 3
+# 20 "/usr/xenomai/include/cobalt/stdlib.h" 2 3
+# 52 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
+
+# 1 "/usr/include/soundtouch/STTypes.h" 1 3 4
+# 42 "/usr/include/soundtouch/STTypes.h" 3 4
+typedef unsigned int uint;
+typedef unsigned long ulong;
+
+
+
+
+
+    typedef ulong ulongptr;
+# 60 "/usr/include/soundtouch/STTypes.h" 3 4
+# 1 "/usr/include/soundtouch/soundtouch_config.h" 1 3 4
+# 60 "/usr/include/soundtouch/STTypes.h" 2 3 4
+
+
+
+
+namespace soundtouch
+{
+# 153 "/usr/include/soundtouch/STTypes.h" 3 4
+        typedef float SAMPLETYPE;
+
+        typedef double LONG_SAMPLETYPE;
+# 164 "/usr/include/soundtouch/STTypes.h" 3 4
+};
+# 53 "/usr/include/soundtouch/FIFOSamplePipe.h" 2 3 4
+
+
+namespace soundtouch
+{
+
+
+class FIFOSamplePipe
+{
+public:
+
+    virtual ~FIFOSamplePipe() {}
+# 73 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
+    virtual SAMPLETYPE *ptrBegin() = 0;
+
+
+
+    virtual void putSamples(const SAMPLETYPE *samples,
+                            uint numSamples
+                            ) = 0;
+
+
+
+    void moveSamples(FIFOSamplePipe &other
+         )
+    {
+        int oNumSamples = other.numSamples();
+
+        putSamples(other.ptrBegin(), oNumSamples);
+        other.receiveSamples(oNumSamples);
+    };
+
+
+
+
+
+
+    virtual uint receiveSamples(SAMPLETYPE *output,
+                                uint maxSamples
+                                ) = 0;
+
+
+
+
+
+
+    virtual uint receiveSamples(uint maxSamples
+                                ) = 0;
+
+
+    virtual uint numSamples() const = 0;
+
+
+    virtual int isEmpty() const = 0;
+
+
+    virtual void clear() = 0;
+
+
+
+    virtual uint adjustAmountOfSamples(uint numSamples) = 0;
+
+};
+# 134 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
+class FIFOProcessor :public FIFOSamplePipe
+{
+protected:
+
+    FIFOSamplePipe *output;
+
+
+    void setOutPipe(FIFOSamplePipe *pOutput)
+    {
+        (static_cast<void> (0));
+        (static_cast<void> (0));
+        output = pOutput;
+    }
+
+
+
+
+    FIFOProcessor()
+    {
+        output = __null;
+    }
+
+
+
+    FIFOProcessor(FIFOSamplePipe *pOutput
+                 )
+    {
+        output = pOutput;
+    }
+
+
+
+    virtual ~FIFOProcessor()
+    {
+    }
+# 178 "/usr/include/soundtouch/FIFOSamplePipe.h" 3 4
+    virtual SAMPLETYPE *ptrBegin()
+    {
+        return output->ptrBegin();
+    }
+
+public:
+
+
+
+
+
+
+    virtual uint receiveSamples(SAMPLETYPE *outBuffer,
+                                uint maxSamples
+                                )
+    {
+        return output->receiveSamples(outBuffer, maxSamples);
+    }
+
+
+
+
+
+
+
+    virtual uint receiveSamples(uint maxSamples
+                                )
+    {
+        return output->receiveSamples(maxSamples);
+    }
+
+
+
+    virtual uint numSamples() const
+    {
+        return output->numSamples();
+    }
+
+
+
+    virtual int isEmpty() const
+    {
+        return output->isEmpty();
+    }
+
+
+
+    virtual uint adjustAmountOfSamples(uint numSamples)
+    {
+        return output->adjustAmountOfSamples(numSamples);
+    }
+
+};
+
+}
+# 75 "/usr/include/soundtouch/SoundTouch.h" 2 3 4
+
+
+
+namespace soundtouch
+{
+# 144 "/usr/include/soundtouch/SoundTouch.h" 3 4
+class SoundTouch : public FIFOProcessor
+{
+private:
+
+    class RateTransposer *pRateTransposer;
+
+
+    class TDStretch *pTDStretch;
+
+
+    double virtualRate;
+
+
+    double virtualTempo;
+
+
+    double virtualPitch;
+
+
+    bool bSrateSet;
+
+
+
+    double samplesExpectedOut;
+
+
+    long samplesOutput;
+
+
+
+    void calcEffectiveRateAndTempo();
+
+protected :
+
+    uint channels;
+
+
+    double rate;
+
+
+    double tempo;
+
+public:
+    SoundTouch();
+    virtual ~SoundTouch();
+
+
+    static const char *getVersionString();
+
+
+    static uint getVersionId();
+
+
+
+    void setRate(double newRate);
+
+
+
+    void setTempo(double newTempo);
+
+
+
+    void setRateChange(double newRate);
+
+
+
+    void setTempoChange(double newTempo);
+
+
+
+    void setPitch(double newPitch);
+
+
+
+    void setPitchOctaves(double newPitch);
+
+
+
+    void setPitchSemiTones(int newPitch);
+    void setPitchSemiTones(double newPitch);
+
+
+    void setChannels(uint numChannels);
+
+
+    void setSampleRate(uint srate);
+# 238 "/usr/include/soundtouch/SoundTouch.h" 3 4
+    void flush();
+
+
+
+
+    virtual void putSamples(
+            const SAMPLETYPE *samples,
+            uint numSamples
+
+
+            );
+
+
+
+
+
+
+    virtual uint receiveSamples(SAMPLETYPE *output,
+        uint maxSamples
+        );
+
+
+
+
+
+
+    virtual uint receiveSamples(uint maxSamples
+        );
+
+
+
+    virtual void clear();
+
+
+
+
+
+    bool setSetting(int settingId,
+                    int value
+                    );
+
+
+
+
+
+    int getSetting(int settingId
+                   ) const;
+
+
+    virtual uint numUnprocessedSamples() const;
+# 298 "/usr/include/soundtouch/SoundTouch.h" 3 4
+};
+
+}
+# 5 "/root/Bela/projects/MEng-Project/PitchShifter.h" 2
+
+# 1 "/usr/bin/../lib/gcc/arm-linux-gnueabihf/6.3.0/../../../../include/c++/6.3.0/math.h" 1 3
+# 7 "/root/Bela/projects/MEng-Project/PitchShifter.h" 2
+
+class PitchShifter {
+public:
+ void initDL(int sampleRate);
+ float shiftDL(float frame);
+ void setShiftDL(float shift);
+
+ void initWSOLA(int sampleRate, int bufferLength);
+ void readInWSOLA(float* audioBuffer);
+ void shiftWSOLA(float currentF0, float shiftAmount);
+ int readOutWSOLA(float* audioBuffer);
+
+private:
+ float frequnecyIntervalToSemitones(int currentF0, int newF0);
+
+ stk::PitShift pitchShifterDL;
+ soundtouch::SoundTouch pitchShifterWSOLA;
+
+ int sampleRate;
+ int bufferLength;
+};
+# 10 "/root/Bela/projects/MEng-Project/render.cpp" 2
+# 1 "/root/Bela/projects/MEng-Project/PitchTracker.h" 1
+
+
+# 1 "/usr/include/aubio/aubio.h" 1 3 4
+# 158 "/usr/include/aubio/aubio.h" 3 4
+extern "C"
+{
+
+
+
+
+# 1 "/usr/include/aubio/types.h" 1 3 4
+# 31 "/usr/include/aubio/types.h" 3 4
+extern "C" {
+# 41 "/usr/include/aubio/types.h" 3 4
+typedef float smpl_t;
+# 51 "/usr/include/aubio/types.h" 3 4
+typedef double lsmp_t;
+# 60 "/usr/include/aubio/types.h" 3 4
+typedef unsigned int uint_t;
+
+typedef int sint_t;
+
+typedef char char_t;
+
+
+}
+# 164 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/fvec.h" 1 3 4
+# 25 "/usr/include/aubio/fvec.h" 3 4
+extern "C" {
+# 67 "/usr/include/aubio/fvec.h" 3 4
+typedef struct {
+  uint_t length;
+  smpl_t *data;
+} fvec_t;
+
+
+
+
+
+
+fvec_t * new_fvec(uint_t length);
+
+
+
+
+
+
+void del_fvec(fvec_t *s);
+
+
+
+
+
+
+
+smpl_t fvec_get_sample(const fvec_t *s, uint_t position);
+# 101 "/usr/include/aubio/fvec.h" 3 4
+void fvec_set_sample(fvec_t *s, smpl_t data, uint_t position);
+
+
+
+
+
+
+smpl_t * fvec_get_data(const fvec_t *s);
+
+
+
+
+
+
+void fvec_print(const fvec_t *s);
+
+
+
+
+
+
+
+void fvec_set_all (fvec_t *s, smpl_t val);
+
+
+
+
+
+
+void fvec_zeros(fvec_t *s);
+
+
+
+
+
+
+void fvec_ones(fvec_t *s);
+
+
+
+
+
+
+void fvec_rev(fvec_t *s);
+# 155 "/usr/include/aubio/fvec.h" 3 4
+void fvec_weight(fvec_t *s, const fvec_t *weight);
+
+
+
+
+
+
+
+void fvec_copy(const fvec_t *s, fvec_t *t);
+# 172 "/usr/include/aubio/fvec.h" 3 4
+void fvec_weighted_copy(const fvec_t *in, const fvec_t *weight, fvec_t *out);
+
+
+}
+# 165 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/cvec.h" 1 3 4
+# 25 "/usr/include/aubio/cvec.h" 3 4
+extern "C" {
+# 63 "/usr/include/aubio/cvec.h" 3 4
+typedef struct {
+  uint_t length;
+  smpl_t *norm;
+  smpl_t *phas;
+} cvec_t;
+# 80 "/usr/include/aubio/cvec.h" 3 4
+cvec_t * new_cvec(uint_t length);
+
+
+
+
+
+
+void del_cvec(cvec_t *s);
+# 101 "/usr/include/aubio/cvec.h" 3 4
+void cvec_norm_set_sample (cvec_t *s, smpl_t val, uint_t position);
+# 115 "/usr/include/aubio/cvec.h" 3 4
+void cvec_phas_set_sample (cvec_t *s, smpl_t val, uint_t position);
+# 128 "/usr/include/aubio/cvec.h" 3 4
+smpl_t cvec_norm_get_sample (cvec_t *s, uint_t position);
+# 142 "/usr/include/aubio/cvec.h" 3 4
+smpl_t cvec_phas_get_sample (cvec_t *s, uint_t position);
+# 153 "/usr/include/aubio/cvec.h" 3 4
+smpl_t * cvec_norm_get_data (const cvec_t *s);
+# 165 "/usr/include/aubio/cvec.h" 3 4
+smpl_t * cvec_phas_get_data (const cvec_t *s);
+
+
+
+
+
+
+void cvec_print(const cvec_t *s);
+
+
+
+
+
+
+
+void cvec_copy(const cvec_t *s, cvec_t *t);
+
+
+
+
+
+
+
+void cvec_norm_set_all (cvec_t *s, smpl_t val);
+
+
+
+
+
+
+void cvec_norm_zeros(cvec_t *s);
+
+
+
+
+
+
+void cvec_norm_ones(cvec_t *s);
+
+
+
+
+
+
+
+void cvec_phas_set_all (cvec_t *s, smpl_t val);
+
+
+
+
+
+
+void cvec_phas_zeros(cvec_t *s);
+
+
+
+
+
+
+void cvec_phas_ones(cvec_t *s);
+
+
+
+
+
+
+void cvec_zeros(cvec_t *s);
+
+
+}
+# 166 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/lvec.h" 1 3 4
+# 25 "/usr/include/aubio/lvec.h" 3 4
+extern "C" {
+# 43 "/usr/include/aubio/lvec.h" 3 4
+typedef struct {
+  uint_t length;
+  lsmp_t *data;
+} lvec_t;
+
+
+
+
+
+
+lvec_t * new_lvec(uint_t length);
+
+
+
+
+
+void del_lvec(lvec_t *s);
+
+
+
+
+
+
+
+lsmp_t lvec_get_sample(lvec_t *s, uint_t position);
+# 76 "/usr/include/aubio/lvec.h" 3 4
+void lvec_set_sample(lvec_t *s, lsmp_t data, uint_t position);
+
+
+
+
+
+
+lsmp_t * lvec_get_data(const lvec_t *s);
+
+
+
+
+
+
+void lvec_print(const lvec_t *s);
+
+
+
+
+
+
+
+void lvec_set_all(lvec_t *s, smpl_t val);
+
+
+
+
+
+
+void lvec_zeros(lvec_t *s);
+
+
+
+
+
+
+void lvec_ones(lvec_t *s);
+
+
+}
+# 167 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/fmat.h" 1 3 4
+# 25 "/usr/include/aubio/fmat.h" 3 4
+extern "C" {
+# 40 "/usr/include/aubio/fmat.h" 3 4
+typedef struct {
+  uint_t length;
+  uint_t height;
+  smpl_t **data;
+} fmat_t;
+
+
+
+
+
+
+
+fmat_t * new_fmat(uint_t height, uint_t length);
+
+
+
+
+
+
+void del_fmat(fmat_t *s);
+# 68 "/usr/include/aubio/fmat.h" 3 4
+smpl_t fmat_get_sample(const fmat_t *s, uint_t channel, uint_t position);
+# 78 "/usr/include/aubio/fmat.h" 3 4
+void fmat_set_sample(fmat_t *s, smpl_t data, uint_t channel, uint_t position);
+# 87 "/usr/include/aubio/fmat.h" 3 4
+void fmat_get_channel (const fmat_t *s, uint_t channel, fvec_t *output);
+
+
+
+
+
+
+
+smpl_t * fmat_get_channel_data (const fmat_t *s, uint_t channel);
+
+
+
+
+
+
+smpl_t ** fmat_get_data(const fmat_t *s);
+
+
+
+
+
+
+void fmat_print(const fmat_t *s);
+
+
+
+
+
+
+
+void fmat_set(fmat_t *s, smpl_t val);
+
+
+
+
+
+
+void fmat_zeros(fmat_t *s);
+
+
+
+
+
+
+void fmat_ones(fmat_t *s);
+
+
+
+
+
+
+void fmat_rev(fmat_t *s);
+# 149 "/usr/include/aubio/fmat.h" 3 4
+void fmat_weight(fmat_t *s, const fmat_t *weight);
+
+
+
+
+
+
+
+void fmat_copy(const fmat_t *s, fmat_t *t);
+# 166 "/usr/include/aubio/fmat.h" 3 4
+void fmat_vecmul(const fmat_t *s, const fvec_t *scale, fvec_t *output);
+
+
+}
+# 168 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/musicutils.h" 1 3 4
+# 29 "/usr/include/aubio/musicutils.h" 3 4
+extern "C" {
+# 38 "/usr/include/aubio/musicutils.h" 3 4
+fvec_t *new_aubio_window (char_t * window_type, uint_t size);
+# 63 "/usr/include/aubio/musicutils.h" 3 4
+uint_t fvec_set_window (fvec_t * window, char_t * window_type);
+# 75 "/usr/include/aubio/musicutils.h" 3 4
+smpl_t aubio_unwrap2pi (smpl_t phase);
+
+
+smpl_t aubio_bintomidi (smpl_t bin, smpl_t samplerate, smpl_t fftsize);
+
+
+smpl_t aubio_miditobin (smpl_t midi, smpl_t samplerate, smpl_t fftsize);
+
+
+smpl_t aubio_bintofreq (smpl_t bin, smpl_t samplerate, smpl_t fftsize);
+
+
+smpl_t aubio_freqtobin (smpl_t freq, smpl_t samplerate, smpl_t fftsize);
+
+
+smpl_t aubio_freqtomidi (smpl_t freq);
+
+
+smpl_t aubio_miditofreq (smpl_t midi);
+
+
+
+
+
+
+
+void aubio_cleanup (void);
+# 113 "/usr/include/aubio/musicutils.h" 3 4
+smpl_t aubio_zero_crossing_rate (fvec_t * v);
+# 124 "/usr/include/aubio/musicutils.h" 3 4
+smpl_t aubio_level_lin (const fvec_t * v);
+# 137 "/usr/include/aubio/musicutils.h" 3 4
+smpl_t aubio_db_spl (const fvec_t * v);
+# 147 "/usr/include/aubio/musicutils.h" 3 4
+uint_t aubio_silence_detection (const fvec_t * v, smpl_t threshold);
+# 157 "/usr/include/aubio/musicutils.h" 3 4
+smpl_t aubio_level_detection (const fvec_t * v, smpl_t threshold);
+
+
+}
+# 169 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/vecutils.h" 1 3 4
+# 31 "/usr/include/aubio/vecutils.h" 3 4
+extern "C" {
+
+
+
+
+
+
+
+void fvec_exp (fvec_t *s);
+
+
+
+
+
+
+void fvec_cos (fvec_t *s);
+
+
+
+
+
+
+void fvec_sin (fvec_t *s);
+
+
+
+
+
+
+void fvec_abs (fvec_t *s);
+
+
+
+
+
+
+void fvec_sqrt (fvec_t *s);
+
+
+
+
+
+
+void fvec_log10 (fvec_t *s);
+
+
+
+
+
+
+void fvec_log (fvec_t *s);
+
+
+
+
+
+
+void fvec_floor (fvec_t *s);
+
+
+
+
+
+
+void fvec_ceil (fvec_t *s);
+
+
+
+
+
+
+void fvec_round (fvec_t *s);
+
+
+
+
+
+
+
+void fvec_pow (fvec_t *s, smpl_t pow);
+
+
+}
+# 170 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/temporal/resampler.h" 1 3 4
+# 34 "/usr/include/aubio/temporal/resampler.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_resampler_t aubio_resampler_t;
+
+
+
+
+
+
+
+aubio_resampler_t *new_aubio_resampler (smpl_t ratio, uint_t type);
+
+
+void del_aubio_resampler (aubio_resampler_t * s);
+# 58 "/usr/include/aubio/temporal/resampler.h" 3 4
+void aubio_resampler_do (aubio_resampler_t * s, const fvec_t * input,
+    fvec_t * output);
+
+
+}
+# 171 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/temporal/filter.h" 1 3 4
+# 66 "/usr/include/aubio/temporal/filter.h" 3 4
+extern "C" {
+
+
+
+
+
+typedef struct _aubio_filter_t aubio_filter_t;
+
+
+
+
+
+
+
+void aubio_filter_do (aubio_filter_t * f, fvec_t * in);
+# 89 "/usr/include/aubio/temporal/filter.h" 3 4
+void aubio_filter_do_outplace (aubio_filter_t * f, const fvec_t * in, fvec_t * out);
+# 98 "/usr/include/aubio/temporal/filter.h" 3 4
+void aubio_filter_do_filtfilt (aubio_filter_t * f, fvec_t * in, fvec_t * tmp);
+# 107 "/usr/include/aubio/temporal/filter.h" 3 4
+lvec_t *aubio_filter_get_feedback (const aubio_filter_t * f);
+# 116 "/usr/include/aubio/temporal/filter.h" 3 4
+lvec_t *aubio_filter_get_feedforward (const aubio_filter_t * f);
+# 125 "/usr/include/aubio/temporal/filter.h" 3 4
+uint_t aubio_filter_get_order (const aubio_filter_t * f);
+# 134 "/usr/include/aubio/temporal/filter.h" 3 4
+uint_t aubio_filter_get_samplerate (const aubio_filter_t * f);
+# 144 "/usr/include/aubio/temporal/filter.h" 3 4
+uint_t aubio_filter_set_samplerate (aubio_filter_t * f, uint_t samplerate);
+
+
+
+
+
+
+void aubio_filter_do_reset (aubio_filter_t * f);
+# 163 "/usr/include/aubio/temporal/filter.h" 3 4
+aubio_filter_t *new_aubio_filter (uint_t order);
+
+
+
+
+
+
+void del_aubio_filter (aubio_filter_t * f);
+
+
+}
+# 172 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/temporal/biquad.h" 1 3 4
+# 43 "/usr/include/aubio/temporal/biquad.h" 3 4
+extern "C" {
+# 56 "/usr/include/aubio/temporal/biquad.h" 3 4
+uint_t aubio_filter_set_biquad (aubio_filter_t * f, lsmp_t b0, lsmp_t b1,
+    lsmp_t b2, lsmp_t a1, lsmp_t a2);
+# 68 "/usr/include/aubio/temporal/biquad.h" 3 4
+aubio_filter_t *new_aubio_filter_biquad (lsmp_t b0, lsmp_t b1, lsmp_t b2,
+    lsmp_t a1, lsmp_t a2);
+
+
+}
+# 173 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/temporal/a_weighting.h" 1 3 4
+# 60 "/usr/include/aubio/temporal/a_weighting.h" 3 4
+extern "C" {
+# 72 "/usr/include/aubio/temporal/a_weighting.h" 3 4
+aubio_filter_t *new_aubio_filter_a_weighting (uint_t samplerate);
+# 82 "/usr/include/aubio/temporal/a_weighting.h" 3 4
+uint_t aubio_filter_set_a_weighting (aubio_filter_t * f, uint_t samplerate);
+
+
+}
+# 174 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/temporal/c_weighting.h" 1 3 4
+# 60 "/usr/include/aubio/temporal/c_weighting.h" 3 4
+extern "C" {
+# 72 "/usr/include/aubio/temporal/c_weighting.h" 3 4
+aubio_filter_t *new_aubio_filter_c_weighting (uint_t samplerate);
+# 82 "/usr/include/aubio/temporal/c_weighting.h" 3 4
+uint_t aubio_filter_set_c_weighting (aubio_filter_t * f, uint_t samplerate);
+
+
+}
+# 175 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/fft.h" 1 3 4
+# 38 "/usr/include/aubio/spectral/fft.h" 3 4
+extern "C" {
+
+
+
+
+
+
+
+typedef struct _aubio_fft_t aubio_fft_t;
+
+
+
+
+
+
+aubio_fft_t * new_aubio_fft (uint_t size);
+
+
+
+
+
+void del_aubio_fft(aubio_fft_t * s);
+# 68 "/usr/include/aubio/spectral/fft.h" 3 4
+void aubio_fft_do (aubio_fft_t *s, const fvec_t * input, cvec_t * spectrum);
+
+
+
+
+
+
+
+void aubio_fft_rdo (aubio_fft_t *s, const cvec_t * spectrum, fvec_t * output);
+# 85 "/usr/include/aubio/spectral/fft.h" 3 4
+void aubio_fft_do_complex (aubio_fft_t *s, const fvec_t * input, fvec_t * compspec);
+
+
+
+
+
+
+
+void aubio_fft_rdo_complex (aubio_fft_t *s, const fvec_t * compspec, fvec_t * output);
+
+
+
+
+
+
+
+void aubio_fft_get_spectrum(const fvec_t * compspec, cvec_t * spectrum);
+
+
+
+
+
+
+void aubio_fft_get_realimag(const cvec_t * spectrum, fvec_t * compspec);
+
+
+
+
+
+
+
+void aubio_fft_get_phas(const fvec_t * compspec, cvec_t * spectrum);
+
+
+
+
+
+
+void aubio_fft_get_imag(const cvec_t * spectrum, fvec_t * compspec);
+
+
+
+
+
+
+
+void aubio_fft_get_norm(const fvec_t * compspec, cvec_t * spectrum);
+
+
+
+
+
+
+void aubio_fft_get_real(const cvec_t * spectrum, fvec_t * compspec);
+
+
+}
+# 176 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/phasevoc.h" 1 3 4
+# 38 "/usr/include/aubio/spectral/phasevoc.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_pvoc_t aubio_pvoc_t;
+
+
+
+
+
+
+
+aubio_pvoc_t * new_aubio_pvoc (uint_t win_s, uint_t hop_s);
+
+
+
+
+
+void del_aubio_pvoc(aubio_pvoc_t *pv);
+# 70 "/usr/include/aubio/spectral/phasevoc.h" 3 4
+void aubio_pvoc_do(aubio_pvoc_t *pv, const fvec_t *in, cvec_t * fftgrain);
+# 83 "/usr/include/aubio/spectral/phasevoc.h" 3 4
+void aubio_pvoc_rdo(aubio_pvoc_t *pv, cvec_t * fftgrain, fvec_t *out);
+
+
+
+
+
+
+uint_t aubio_pvoc_get_win(aubio_pvoc_t* pv);
+
+
+
+
+
+uint_t aubio_pvoc_get_hop(aubio_pvoc_t* pv);
+
+
+}
+# 177 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/filterbank.h" 1 3 4
+# 36 "/usr/include/aubio/spectral/filterbank.h" 3 4
+extern "C"
+{
+
+
+
+
+
+
+
+typedef struct _aubio_filterbank_t aubio_filterbank_t;
+
+
+
+
+
+
+
+aubio_filterbank_t *new_aubio_filterbank (uint_t n_filters, uint_t win_s);
+
+
+
+
+
+
+void del_aubio_filterbank (aubio_filterbank_t * f);
+# 69 "/usr/include/aubio/spectral/filterbank.h" 3 4
+void aubio_filterbank_do (aubio_filterbank_t * f, const cvec_t * in, fvec_t * out);
+
+
+
+
+
+
+fmat_t *aubio_filterbank_get_coeffs (const aubio_filterbank_t * f);
+
+
+
+
+
+
+
+uint_t aubio_filterbank_set_coeffs (aubio_filterbank_t * f, const fmat_t * filters);
+
+
+}
+# 178 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/filterbank_mel.h" 1 3 4
+# 38 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
+extern "C"
+{
+# 52 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
+uint_t aubio_filterbank_set_triangle_bands (aubio_filterbank_t * fb,
+    const fvec_t * freqs, smpl_t samplerate);
+# 65 "/usr/include/aubio/spectral/filterbank_mel.h" 3 4
+uint_t aubio_filterbank_set_mel_coeffs_slaney (aubio_filterbank_t * fb,
+    smpl_t samplerate);
+
+
+}
+# 179 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/mfcc.h" 1 3 4
+# 41 "/usr/include/aubio/spectral/mfcc.h" 3 4
+extern "C"
+{
+
+
+
+typedef struct _aubio_mfcc_t aubio_mfcc_t;
+# 56 "/usr/include/aubio/spectral/mfcc.h" 3 4
+aubio_mfcc_t *new_aubio_mfcc (uint_t buf_size,
+    uint_t n_filters, uint_t n_coeffs, uint_t samplerate);
+
+
+
+
+
+
+void del_aubio_mfcc (aubio_mfcc_t * mf);
+# 73 "/usr/include/aubio/spectral/mfcc.h" 3 4
+void aubio_mfcc_do (aubio_mfcc_t * mf, const cvec_t * in, fvec_t * out);
+
+
+}
+# 180 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/specdesc.h" 1 3 4
+# 152 "/usr/include/aubio/spectral/specdesc.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_specdesc_t aubio_specdesc_t;
+# 167 "/usr/include/aubio/spectral/specdesc.h" 3 4
+void aubio_specdesc_do (aubio_specdesc_t * o, const cvec_t * fftgrain,
+    fvec_t * desc);
+# 181 "/usr/include/aubio/spectral/specdesc.h" 3 4
+aubio_specdesc_t *new_aubio_specdesc (const char_t * method, uint_t buf_size);
+
+
+
+
+
+
+void del_aubio_specdesc (aubio_specdesc_t * o);
+
+
+}
+# 181 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/spectral/tss.h" 1 3 4
+# 43 "/usr/include/aubio/spectral/tss.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_tss_t aubio_tss_t;
+
+
+
+
+
+
+
+aubio_tss_t *new_aubio_tss (uint_t buf_size, uint_t hop_size);
+
+
+
+
+
+
+void del_aubio_tss (aubio_tss_t * o);
+# 72 "/usr/include/aubio/spectral/tss.h" 3 4
+void aubio_tss_do (aubio_tss_t * o, const cvec_t * input, cvec_t * trans,
+    cvec_t * stead);
+
+
+
+
+
+
+
+uint_t aubio_tss_set_threshold (aubio_tss_t * o, smpl_t thrs);
+
+
+
+
+
+
+
+uint_t aubio_tss_set_alpha (aubio_tss_t * o, smpl_t alpha);
+
+
+
+
+
+
+
+uint_t aubio_tss_set_beta (aubio_tss_t * o, smpl_t beta);
+
+
+}
+# 182 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/pitch/pitch.h" 1 3 4
+# 25 "/usr/include/aubio/pitch/pitch.h" 3 4
+extern "C" {
+# 101 "/usr/include/aubio/pitch/pitch.h" 3 4
+typedef struct _aubio_pitch_t aubio_pitch_t;
+# 110 "/usr/include/aubio/pitch/pitch.h" 3 4
+void aubio_pitch_do (aubio_pitch_t * o, const fvec_t * in, fvec_t * out);
+
+
+
+
+
+
+
+uint_t aubio_pitch_set_tolerance (aubio_pitch_t * o, smpl_t tol);
+
+
+
+
+
+
+void del_aubio_pitch (aubio_pitch_t * o);
+# 137 "/usr/include/aubio/pitch/pitch.h" 3 4
+aubio_pitch_t *new_aubio_pitch (const char_t * method,
+    uint_t buf_size, uint_t hop_size, uint_t samplerate);
+# 148 "/usr/include/aubio/pitch/pitch.h" 3 4
+uint_t aubio_pitch_set_unit (aubio_pitch_t * o, const char_t * mode);
+# 158 "/usr/include/aubio/pitch/pitch.h" 3 4
+uint_t aubio_pitch_set_silence (aubio_pitch_t * o, smpl_t silence);
+# 167 "/usr/include/aubio/pitch/pitch.h" 3 4
+smpl_t aubio_pitch_get_silence (aubio_pitch_t * o);
+# 176 "/usr/include/aubio/pitch/pitch.h" 3 4
+smpl_t aubio_pitch_get_confidence (aubio_pitch_t * o);
+
+
+}
+# 183 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/onset/onset.h" 1 3 4
+# 46 "/usr/include/aubio/onset/onset.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_onset_t aubio_onset_t;
+# 62 "/usr/include/aubio/onset/onset.h" 3 4
+aubio_onset_t * new_aubio_onset (const char_t * method,
+    uint_t buf_size, uint_t hop_size, uint_t samplerate);
+# 91 "/usr/include/aubio/onset/onset.h" 3 4
+void aubio_onset_do (aubio_onset_t *o, const fvec_t * input, fvec_t * onset);
+# 100 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_get_last (const aubio_onset_t *o);
+# 109 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_last_s (const aubio_onset_t *o);
+# 118 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_last_ms (const aubio_onset_t *o);
+
+
+
+
+
+
+
+uint_t aubio_onset_set_silence(aubio_onset_t * o, smpl_t silence);
+# 135 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_silence(const aubio_onset_t * o);
+
+
+
+
+
+
+
+smpl_t aubio_onset_get_descriptor (const aubio_onset_t *o);
+
+
+
+
+
+
+
+smpl_t aubio_onset_get_thresholded_descriptor (const aubio_onset_t *o);
+
+
+
+
+
+
+
+uint_t aubio_onset_set_threshold(aubio_onset_t * o, smpl_t threshold);
+# 168 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_minioi(aubio_onset_t * o, uint_t minioi);
+# 177 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_minioi_s(aubio_onset_t * o, smpl_t minioi);
+# 186 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_minioi_ms(aubio_onset_t * o, smpl_t minioi);
+# 195 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_delay(aubio_onset_t * o, uint_t delay);
+# 204 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_delay_s(aubio_onset_t * o, smpl_t delay);
+# 213 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_set_delay_ms(aubio_onset_t * o, smpl_t delay);
+# 222 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_get_minioi(const aubio_onset_t * o);
+# 231 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_minioi_s(const aubio_onset_t * o);
+# 240 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_minioi_ms(const aubio_onset_t * o);
+# 249 "/usr/include/aubio/onset/onset.h" 3 4
+uint_t aubio_onset_get_delay(const aubio_onset_t * o);
+# 258 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_delay_s(const aubio_onset_t * o);
+# 267 "/usr/include/aubio/onset/onset.h" 3 4
+smpl_t aubio_onset_get_delay_ms(const aubio_onset_t * o);
+
+
+
+
+
+
+
+smpl_t aubio_onset_get_threshold(const aubio_onset_t * o);
+
+
+
+
+
+
+void del_aubio_onset(aubio_onset_t * o);
+
+
+}
+# 184 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/tempo/tempo.h" 1 3 4
+# 37 "/usr/include/aubio/tempo/tempo.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_tempo_t aubio_tempo_t;
+# 53 "/usr/include/aubio/tempo/tempo.h" 3 4
+aubio_tempo_t * new_aubio_tempo (const char_t * method,
+    uint_t buf_size, uint_t hop_size, uint_t samplerate);
+# 63 "/usr/include/aubio/tempo/tempo.h" 3 4
+void aubio_tempo_do (aubio_tempo_t *o, const fvec_t * input, fvec_t * tempo);
+
+
+
+
+
+
+uint_t aubio_tempo_get_last (aubio_tempo_t *o);
+
+
+
+
+
+
+smpl_t aubio_tempo_get_last_s (aubio_tempo_t *o);
+
+
+
+
+
+
+smpl_t aubio_tempo_get_last_ms (aubio_tempo_t *o);
+# 94 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_set_silence(aubio_tempo_t * o, smpl_t silence);
+# 103 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_silence(aubio_tempo_t * o);
+# 113 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_set_threshold(aubio_tempo_t * o, smpl_t threshold);
+# 122 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_threshold(aubio_tempo_t * o);
+# 132 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_period (aubio_tempo_t * bt);
+# 142 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_period_s (aubio_tempo_t * bt);
+# 151 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_bpm(aubio_tempo_t * o);
+# 161 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_confidence(aubio_tempo_t * o);
+
+
+
+
+
+
+
+uint_t aubio_tempo_set_tatum_signature(aubio_tempo_t *o, uint_t signature);
+# 178 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_was_tatum(aubio_tempo_t *o);
+
+
+
+
+
+
+smpl_t aubio_tempo_get_last_tatum(aubio_tempo_t *o);
+# 194 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_get_delay(aubio_tempo_t * o);
+# 203 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_delay_s(aubio_tempo_t * o);
+# 212 "/usr/include/aubio/tempo/tempo.h" 3 4
+smpl_t aubio_tempo_get_delay_ms(aubio_tempo_t * o);
+# 222 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_set_delay(aubio_tempo_t * o, sint_t delay);
+# 232 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_set_delay_s(aubio_tempo_t * o, smpl_t delay);
+# 242 "/usr/include/aubio/tempo/tempo.h" 3 4
+uint_t aubio_tempo_set_delay_ms(aubio_tempo_t * o, smpl_t delay);
+
+
+
+
+
+
+void del_aubio_tempo(aubio_tempo_t * o);
+
+
+}
+# 185 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/notes/notes.h" 1 3 4
+# 25 "/usr/include/aubio/notes/notes.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_notes_t aubio_notes_t;
+# 41 "/usr/include/aubio/notes/notes.h" 3 4
+aubio_notes_t * new_aubio_notes (const char_t * method,
+    uint_t buf_size, uint_t hop_size, uint_t samplerate);
+
+
+
+
+
+
+void del_aubio_notes(aubio_notes_t * o);
+# 58 "/usr/include/aubio/notes/notes.h" 3 4
+void aubio_notes_do (aubio_notes_t *o, const fvec_t * input, fvec_t * output);
+
+
+}
+# 186 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/io/source.h" 1 3 4
+# 67 "/usr/include/aubio/io/source.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_source_t aubio_source_t;
+# 88 "/usr/include/aubio/io/source.h" 3 4
+aubio_source_t * new_aubio_source(const char_t * uri, uint_t samplerate, uint_t hop_size);
+# 102 "/usr/include/aubio/io/source.h" 3 4
+void aubio_source_do(aubio_source_t * s, fvec_t * read_to, uint_t * read);
+# 116 "/usr/include/aubio/io/source.h" 3 4
+void aubio_source_do_multi(aubio_source_t * s, fmat_t * read_to, uint_t * read);
+# 126 "/usr/include/aubio/io/source.h" 3 4
+uint_t aubio_source_get_samplerate(aubio_source_t * s);
+# 136 "/usr/include/aubio/io/source.h" 3 4
+uint_t aubio_source_get_channels (aubio_source_t * s);
+# 148 "/usr/include/aubio/io/source.h" 3 4
+uint_t aubio_source_seek (aubio_source_t * s, uint_t pos);
+# 158 "/usr/include/aubio/io/source.h" 3 4
+uint_t aubio_source_get_duration (aubio_source_t * s);
+# 169 "/usr/include/aubio/io/source.h" 3 4
+uint_t aubio_source_close (aubio_source_t *s);
+# 178 "/usr/include/aubio/io/source.h" 3 4
+void del_aubio_source(aubio_source_t * s);
+
+
+}
+# 187 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/io/sink.h" 1 3 4
+# 57 "/usr/include/aubio/io/sink.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_sink_t aubio_sink_t;
+# 79 "/usr/include/aubio/io/sink.h" 3 4
+aubio_sink_t * new_aubio_sink(const char_t * uri, uint_t samplerate);
+# 96 "/usr/include/aubio/io/sink.h" 3 4
+uint_t aubio_sink_preset_samplerate(aubio_sink_t *s, uint_t samplerate);
+# 113 "/usr/include/aubio/io/sink.h" 3 4
+uint_t aubio_sink_preset_channels(aubio_sink_t *s, uint_t channels);
+# 123 "/usr/include/aubio/io/sink.h" 3 4
+uint_t aubio_sink_get_samplerate(const aubio_sink_t *s);
+# 133 "/usr/include/aubio/io/sink.h" 3 4
+uint_t aubio_sink_get_channels(const aubio_sink_t *s);
+# 144 "/usr/include/aubio/io/sink.h" 3 4
+void aubio_sink_do(aubio_sink_t * s, fvec_t * write_data, uint_t write);
+# 155 "/usr/include/aubio/io/sink.h" 3 4
+void aubio_sink_do_multi(aubio_sink_t * s, fmat_t * write_data, uint_t write);
+# 166 "/usr/include/aubio/io/sink.h" 3 4
+uint_t aubio_sink_close(aubio_sink_t * s);
+# 175 "/usr/include/aubio/io/sink.h" 3 4
+void del_aubio_sink(aubio_sink_t * s);
+
+
+}
+# 188 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/synth/sampler.h" 1 3 4
+# 38 "/usr/include/aubio/synth/sampler.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_sampler_t aubio_sampler_t;
+# 52 "/usr/include/aubio/synth/sampler.h" 3 4
+aubio_sampler_t * new_aubio_sampler(uint_t samplerate, uint_t hop_size);
+# 62 "/usr/include/aubio/synth/sampler.h" 3 4
+uint_t aubio_sampler_load( aubio_sampler_t * o, const char_t * uri );
+# 76 "/usr/include/aubio/synth/sampler.h" 3 4
+void aubio_sampler_do ( aubio_sampler_t * o, const fvec_t * input, fvec_t * output);
+# 90 "/usr/include/aubio/synth/sampler.h" 3 4
+void aubio_sampler_do_multi ( aubio_sampler_t * o, const fmat_t * input, fmat_t * output);
+# 99 "/usr/include/aubio/synth/sampler.h" 3 4
+uint_t aubio_sampler_get_playing ( const aubio_sampler_t * o );
+# 109 "/usr/include/aubio/synth/sampler.h" 3 4
+uint_t aubio_sampler_set_playing ( aubio_sampler_t * o, uint_t playing );
+# 118 "/usr/include/aubio/synth/sampler.h" 3 4
+uint_t aubio_sampler_play ( aubio_sampler_t * o );
+# 127 "/usr/include/aubio/synth/sampler.h" 3 4
+uint_t aubio_sampler_stop ( aubio_sampler_t * o );
+
+
+
+
+
+
+void del_aubio_sampler( aubio_sampler_t * o );
+
+
+}
+# 189 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/synth/wavetable.h" 1 3 4
+# 38 "/usr/include/aubio/synth/wavetable.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_wavetable_t aubio_wavetable_t;
+# 52 "/usr/include/aubio/synth/wavetable.h" 3 4
+aubio_wavetable_t * new_aubio_wavetable(uint_t samplerate, uint_t hop_size);
+# 62 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_load( aubio_wavetable_t * o, const char_t * uri );
+# 76 "/usr/include/aubio/synth/wavetable.h" 3 4
+void aubio_wavetable_do ( aubio_wavetable_t * o, const fvec_t * input, fvec_t * output);
+# 90 "/usr/include/aubio/synth/wavetable.h" 3 4
+void aubio_wavetable_do_multi ( aubio_wavetable_t * o, const fmat_t * input, fmat_t * output);
+# 99 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_get_playing ( const aubio_wavetable_t * o );
+# 109 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_set_playing ( aubio_wavetable_t * o, uint_t playing );
+# 118 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_play ( aubio_wavetable_t * o );
+# 127 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_stop ( aubio_wavetable_t * o );
+# 137 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_set_freq ( aubio_wavetable_t * o, smpl_t freq );
+# 146 "/usr/include/aubio/synth/wavetable.h" 3 4
+smpl_t aubio_wavetable_get_freq ( const aubio_wavetable_t * o);
+# 156 "/usr/include/aubio/synth/wavetable.h" 3 4
+uint_t aubio_wavetable_set_amp ( aubio_wavetable_t * o, smpl_t amp );
+# 165 "/usr/include/aubio/synth/wavetable.h" 3 4
+smpl_t aubio_wavetable_get_amp ( const aubio_wavetable_t * o);
+
+
+
+
+
+
+void del_aubio_wavetable( aubio_wavetable_t * o );
+
+
+}
+# 190 "/usr/include/aubio/aubio.h" 2 3 4
+# 1 "/usr/include/aubio/utils/parameter.h" 1 3 4
+# 36 "/usr/include/aubio/utils/parameter.h" 3 4
+extern "C" {
+
+
+
+typedef struct _aubio_parameter_t aubio_parameter_t;
+# 51 "/usr/include/aubio/utils/parameter.h" 3 4
+aubio_parameter_t * new_aubio_parameter(smpl_t min_value, smpl_t max_value, uint_t steps);
+# 61 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_set_target_value ( aubio_parameter_t * param, smpl_t value );
+# 70 "/usr/include/aubio/utils/parameter.h" 3 4
+smpl_t aubio_parameter_get_next_value ( aubio_parameter_t * param );
+# 79 "/usr/include/aubio/utils/parameter.h" 3 4
+smpl_t aubio_parameter_get_current_value ( const aubio_parameter_t * param );
+# 89 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_set_current_value ( aubio_parameter_t * param, smpl_t value );
+# 99 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_set_steps ( aubio_parameter_t * param, uint_t steps );
+# 108 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_get_steps ( const aubio_parameter_t * param);
+# 118 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_set_min_value ( aubio_parameter_t * param, smpl_t min_value );
+# 127 "/usr/include/aubio/utils/parameter.h" 3 4
+smpl_t aubio_parameter_get_min_value ( const aubio_parameter_t * param );
+# 137 "/usr/include/aubio/utils/parameter.h" 3 4
+uint_t aubio_parameter_set_max_value ( aubio_parameter_t * param, smpl_t max_value );
+# 146 "/usr/include/aubio/utils/parameter.h" 3 4
+smpl_t aubio_parameter_get_max_value ( const aubio_parameter_t * param );
+
+
+
+
+
+
+void del_aubio_parameter( aubio_parameter_t * param );
+
+
+}
+# 191 "/usr/include/aubio/aubio.h" 2 3 4
+# 215 "/usr/include/aubio/aubio.h" 3 4
+}
+# 4 "/root/Bela/projects/MEng-Project/PitchTracker.h" 2
+
+
+
+class PitchTracker {
+public:
+ void init(char* pitchMethod, int bufferSize, int samplerate);
+ int getPitch(float* audioBuffer);
+
+private:
+ aubio_pitch_t *pitchDetector;
+ fvec_t *pitchBuffer;
+ fvec_t* fvecAudioBuffer;
+ int bufferSize;
+};
+# 11 "/root/Bela/projects/MEng-Project/render.cpp" 2
+# 1 "/root/Bela/projects/MEng-Project/Reverberator.h" 1
+
+
+# 1 "/usr/local/include/stk/FreeVerb.h" 1 3
+
+
+
+
+# 1 "/usr/local/include/stk/Delay.h" 1 3
+
+
+
+
 
 namespace stk {
 # 24 "/usr/local/include/stk/Delay.h" 3
@@ -39668,6 +39934,9 @@ private:
 
 
 
+enum PitchShiftType { DelayLine, WSOLA };
+PitchShiftType psType = WSOLA;
+
 int bufferPointer = 0;
 int psBufferPointer = 0;
 int sampleCount = 0;
@@ -39698,7 +39967,6 @@ int sampleRate = 0;
 int numFrames = 0;
 
 float currentF0 = 0.0f;
-int numHarmonies = 3;
 int harmonyCount = 0;
 int harmonyRead = 0;
 
@@ -39709,6 +39977,21 @@ float thereminMixDistance = 0.0f;
 float mixLevel = 0.0f;
 
 bool showLEDNotes = false;
+
+
+float gainPot = 0.0f;
+float harmonyPot = 0.0f;
+float keyPot = 0.0f;
+float reverbPot = 0.0f;
+int pgaGain = 0;
+int prevPgaGain = 0;
+int numHarmonies = 0;
+int prevNumHarmonies = 0;
+int keySig = 0;
+int prevKeySig = 0;
+int reverbAmount = 0;
+int prevReverbAmount = 0;
+
 
 bool setup(BelaContext *context, void *userData)
 {
@@ -39729,9 +40012,16 @@ bool setup(BelaContext *context, void *userData)
  pitchTracker.init(pitchTrackingMethod, 2048, sampleRate);
 
 
- pitchShifter1.init(sampleRate, 2048);
- pitchShifter2.init(sampleRate, 2048);
- pitchShifter3.init(sampleRate, 2048);
+ if (psType == DelayLine) {
+  pitchShifter1.initDL(sampleRate);
+  pitchShifter2.initDL(sampleRate);
+  pitchShifter3.initDL(sampleRate);
+ }
+ if (psType == WSOLA) {
+  pitchShifter1.initWSOLA(sampleRate, 2048);
+  pitchShifter2.initWSOLA(sampleRate, 2048);
+  pitchShifter3.initWSOLA(sampleRate, 2048);
+ }
 
 
  reverberator.init(sampleRate);
@@ -39747,7 +40037,7 @@ bool setup(BelaContext *context, void *userData)
  memset(psOutputBuffer2, 0, 2048 * sizeof(float));
  memset(psOutputBuffer3, 0, 2048 * sizeof(float));
 
- pitchShiftTask = Bela_createAuxiliaryTask(&pitch_shift_background, 90, "pitch-shifter");
+ pitchShiftTask = Bela_createAuxiliaryTask(&pitch_shift_background, 30, "pitch-shifter");
 
  return true;
 }
@@ -39772,11 +40062,6 @@ void process_shift(float *inBuffer, int inBufferPointer, float *procBuffer1, flo
   harmonyCount = 0;
 
   harmonyCalculator.setInputValues(currentF0, thereminPitchDistance);
-  rt_printf("n1: %d\n", harmonyCalculator.getNoteIn());
-  rt_printf("n2: %d\n", harmonyCalculator.getFirstHarmonyNote());
-  rt_printf("n3: %d\n", harmonyCalculator.getSecondHarmonyNote());
-  rt_printf("n4: %d\n", harmonyCalculator.getThirdHarmonyNote());
-  rt_printf(".\n");
 
 
   if (currentF0 != 0.0f) {
@@ -39788,30 +40073,96 @@ void process_shift(float *inBuffer, int inBufferPointer, float *procBuffer1, flo
  harmonyCount++;
 
 
- pitchShifter1.readIn(psInputBuffer);
- pitchShifter2.readIn(psInputBuffer);
- pitchShifter3.readIn(psInputBuffer);
 
 
- pitchShifter1.shift(currentF0, harmonyCalculator.getFirstHarmonyShift());
- pitchShifter2.shift(currentF0, harmonyCalculator.getSecondHarmonyShift());
- pitchShifter3.shift(currentF0, harmonyCalculator.getThirdHarmonyShift());
+
+ prevPgaGain = pgaGain;
+ prevNumHarmonies = numHarmonies;
+ prevKeySig = keySig;
+ prevReverbAmount = reverbAmount;
 
 
- pitchShifter1.readOut(psOutputBuffer1);
- pitchShifter2.readOut(psOutputBuffer2);
- pitchShifter3.readOut(psOutputBuffer3);
 
 
- pointer = (inBufferPointer + 2048) % (2048 * 2);
- for(int n = 0; n < 2048; n++) {
-  procBuffer1[pointer] = psOutputBuffer1[n];
-  procBuffer2[pointer] = psOutputBuffer2[n];
-  procBuffer3[pointer] = psOutputBuffer3[n];
+ Bela_setPgaGain(map(gainPot, 0, 1, 0, 50), 0);
+ numHarmonies = static_cast<int>(roundf(map(harmonyPot, 0, 0.86, 0, 3)));
+ harmonyCalculator.setKeySig(static_cast<int>(roundf(map(keyPot, 0, 0.86, 0, 11))));
+ reverberator.setMix(reverbPot);
 
-  pointer++;
-  if(pointer >= (2048 * 2))
-   pointer = 0;
+
+
+
+
+ if (psType == DelayLine) {
+  if (numHarmonies > 0) {
+   pitchShifter1.setShiftDL(harmonyCalculator.getFirstHarmonyShift());
+  }
+  if (numHarmonies > 1) {
+   pitchShifter2.setShiftDL(harmonyCalculator.getSecondHarmonyShift());
+  }
+  if (numHarmonies > 2) {
+   pitchShifter3.setShiftDL(harmonyCalculator.getThirdHarmonyShift());
+  }
+ }
+
+
+ if (psType == WSOLA) {
+
+  if (numHarmonies > 0) {
+   pitchShifter1.readInWSOLA(psInputBuffer);
+  }
+  if (numHarmonies > 1) {
+   pitchShifter2.readInWSOLA(psInputBuffer);
+  }
+  if (numHarmonies > 2) {
+   pitchShifter3.readInWSOLA(psInputBuffer);
+  }
+
+
+  if (numHarmonies > 0) {
+   pitchShifter1.shiftWSOLA(currentF0, 3.0);
+  }
+  if (numHarmonies > 1) {
+   pitchShifter2.shiftWSOLA(currentF0, -3.0);
+  }
+  if (numHarmonies > 2) {
+   pitchShifter3.shiftWSOLA(currentF0, 5.0);
+  }
+
+
+  if (numHarmonies > 0) {
+   pitchShifter1.readOutWSOLA(psOutputBuffer1);
+  }
+  if (numHarmonies > 1) {
+   pitchShifter2.readOutWSOLA(psOutputBuffer2);
+  }
+  if (numHarmonies > 2) {
+   pitchShifter3.readOutWSOLA(psOutputBuffer3);
+  }
+
+
+  pointer = (inBufferPointer + 2048) % (2048 * 2);
+  for(int n = 0; n < 2048; n++) {
+   if (numHarmonies > 0) {
+    procBuffer1[pointer] = psOutputBuffer1[n];
+   } else {
+    procBuffer1[pointer] = 0;
+   }
+   if (numHarmonies > 1) {
+    procBuffer2[pointer] = psOutputBuffer2[n];
+   } else {
+    procBuffer2[pointer] = 0;
+   }
+   if (numHarmonies > 2) {
+    procBuffer3[pointer] = psOutputBuffer3[n];
+   } else {
+    procBuffer3[pointer] = 0;
+   }
+
+   pointer++;
+   if(pointer >= (2048 * 2))
+    pointer = 0;
+  }
  }
 }
 
@@ -39828,17 +40179,25 @@ void pitch_shift_background(void*)
 
 void render(BelaContext *context, void *userData)
 {
-# 240 "/root/Bela/projects/MEng-Project/render.cpp"
  for(unsigned int frameCount = 0; frameCount < numFrames; frameCount++) {
   inputAudioBuffer[bufferPointer] = audioRead(context, frameCount, 0);
 
-
-  outputAudioBuffer[frameCount] = reverberator.applyReverb(
-   inputAudioBuffer[bufferPointer]
-   + (processAudioBuffer1[bufferPointer] * mixLevel)
-   + (processAudioBuffer2[bufferPointer] * mixLevel)
-   + (processAudioBuffer3[bufferPointer] * mixLevel)
-  );
+  if (psType == DelayLine) {
+   outputAudioBuffer[frameCount] = reverberator.applyReverb(
+    inputAudioBuffer[bufferPointer]
+    + (pitchShifter1.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
+    + (pitchShifter2.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
+    + (pitchShifter3.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
+   );
+  }
+  if (psType == WSOLA) {
+   outputAudioBuffer[frameCount] = reverberator.applyReverb(
+    inputAudioBuffer[bufferPointer]
+    + (processAudioBuffer1[bufferPointer] * mixLevel)
+    + (processAudioBuffer2[bufferPointer] * mixLevel)
+    + (processAudioBuffer3[bufferPointer] * mixLevel)
+   );
+  }
 
   for(int channel = 0; channel < 2; channel++) {
    audioWrite(context, frameCount, channel, (outputAudioBuffer[frameCount] / ((numHarmonies + 1) * mixLevel)));
@@ -39850,15 +40209,18 @@ void render(BelaContext *context, void *userData)
 
   sampleCount++;
   if(sampleCount >= 2048) {
+
+   gainPot = analogRead(context, 0, 1);
+   harmonyPot = analogRead(context, 0, 2);
+   keyPot = analogRead(context, 0, 3);
+   reverbPot = analogRead(context, 0, 4);
+
    psBufferPointer = bufferPointer;
    Bela_scheduleAuxiliaryTask(pitchShiftTask);
 
    sampleCount = 0;
   }
  }
-
-
-
 
 
  if (thereminCount == thereminRead) {
@@ -39888,9 +40250,7 @@ void render(BelaContext *context, void *userData)
 
 
 
- mixLevel = 1.0f;
-
- reverberator.setMix(analogRead(context, 0, 4));
+ mixLevel = 0.8f;
 }
 
 void cleanup(BelaContext *context, void *userData)

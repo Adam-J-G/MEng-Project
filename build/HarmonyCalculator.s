@@ -29,14 +29,20 @@ _ZN17HarmonyCalculator9setKeySigEi:     @ @_ZN17HarmonyCalculator9setKeySigEi
 	.save	{r4, r5, r6, r7, r8, lr}
 	push	{r4, r5, r6, r7, r8, lr}
 	movw	r12, #43691
-	add	r2, r1, #2
+	add	r1, r1, #3
 	movt	r12, #10922
-	add	lr, r1, #4
-	smmul	r3, r2, r12
+	smmul	r3, r1, r12
+	asr	r2, r3, #1
+	add	r2, r2, r3, lsr #31
+	add	r2, r2, r2, lsl #1
+	sub	r1, r1, r2, lsl #2
 	str	r1, [r0]
+	add	r2, r1, #2
+	add	lr, r1, #4
 	str	r1, [r0, #4]
-	smmul	r4, lr, r12
 	add	r8, r1, #9
+	smmul	r3, r2, r12
+	smmul	r4, lr, r12
 	asr	r5, r3, #1
 	add	r3, r5, r3, lsr #31
 	add	r5, r1, #5
@@ -199,51 +205,65 @@ _ZN17HarmonyCalculator14setInputValuesEff: @ @_ZN17HarmonyCalculator14setInputVa
 	bl	roundf
                                         @ kill: %S0<def> %S0<kill> %D0<def>
 	movw	r2, #9363
+	vmov.f32	d17, #-1.200000e+01
 	vcvt.s32.f32	d1, d0
 	movt	r2, #37449
 	vsub.f32	d16, d8, d0
 	vmov	r0, s2
 	add	r1, r0, r10
 	add	r7, r10, r0, lsl #1
-	add	r0, r0, r0, lsl #1
+	add	r6, r0, r0, lsl #1
 	smmla	r3, r1, r2, r1
-	add	r0, r0, r10
 	smmla	r5, r7, r2, r7
-	smmla	r2, r0, r2, r0
-	lsr	r6, r3, #2
-	add	r3, r6, r3, lsr #31
+	lsr	r0, r3, #2
+	add	r0, r0, r3, lsr #31
+	add	r3, r6, r10
 	lsr	r6, r5, #2
-	rsb	r3, r3, r3, lsl #3
+	rsb	r0, r0, r0, lsl #3
+	smmla	r2, r3, r2, r3
+	sub	r1, r1, r0
+	add	r0, r4, #4
 	add	r6, r6, r5, lsr #31
-	sub	r1, r1, r3
-	add	r3, r4, #4
+	ldr	r1, [r0, r1, lsl #2]
 	rsb	r6, r6, r6, lsl #3
+	str	r1, [r4, #44]
+	sub	r1, r1, r9
 	sub	r7, r7, r6
 	lsr	r6, r2, #2
 	add	r2, r6, r2, lsr #31
-	ldr	r1, [r3, r1, lsl #2]
-	str	r1, [r4, #44]
-	rsb	r2, r2, r2, lsl #3
-	ldr	r7, [r3, r7, lsl #2]
-	sub	r1, r1, r9
-	sub	r0, r0, r2
-	str	r7, [r4, #48]
 	vmov	s0, r1
-	sub	r1, r7, r9
-	ldr	r0, [r3, r0, lsl #2]
-	vcvt.f32.s32	d17, d0
-	vmov	s0, r1
-	sub	r1, r0, r9
+	ldr	r7, [r0, r7, lsl #2]
 	vcvt.f32.s32	d18, d0
+	rsb	r1, r2, r2, lsl #3
+	sub	r2, r7, r9
+	sub	r1, r3, r1
+	str	r7, [r4, #48]
+	vmov	s2, r2
+	vadd.f32	d0, d18, d16
+	ldr	r0, [r0, r1, lsl #2]
+	vcvt.f32.s32	d18, d1
+	vmov.f32	d1, #6.000000e+00
+	sub	r1, r0, r9
 	str	r0, [r4, #52]
-	vmov	s4, r1
-	vadd.f32	d0, d17, d16
-	vcvt.f32.s32	d17, d2
-	vadd.f32	d1, d18, d16
-	vadd.f32	d2, d17, d16
+	vadd.f32	d3, d0, d17
+	vcmpe.f32	s0, s2
+	vmrs	APSR_nzcv, fpscr
+	vadd.f32	d2, d18, d16
+	vmov	s8, r1
+	vcvt.f32.s32	d18, d4
+	vadd.f32	d4, d2, d17
+	vcmpe.f32	s4, s2
+	vmovgt.f32	s0, s6
+	vmrs	APSR_nzcv, fpscr
+	vadd.f32	d3, d18, d16
+	vcmpe.f32	s6, s2
 	vstr	s0, [r4, #56]
-	vstr	s2, [r4, #60]
-	vstr	s4, [r4, #64]
+	vmovgt.f32	s4, s8
+	vmrs	APSR_nzcv, fpscr
+	vadd.f32	d4, d3, d17
+	vstr	s4, [r4, #60]
+	vmovgt.f32	s6, s8
+	vstr	s6, [r4, #64]
 .LBB1_17:
 	vpop	{d8, d9}
 	add	sp, sp, #4

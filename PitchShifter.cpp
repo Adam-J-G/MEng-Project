@@ -2,29 +2,46 @@
 
 #include "PitchShifter.h"
 
-void PitchShifter::init(int sampleRate, int bufferLength) {
+/*** Delay-line Pitch Shift Functions ***/
+void PitchShifter::initDL(int sampleRate) {
+	stk::Stk::setSampleRate(sampleRate);
+	pitchShifterDL.setShift(1.0);
+}
+
+float PitchShifter::shiftDL(float frame) {
+	return pitchShifterDL.tick(frame);
+}
+
+void PitchShifter::setShiftDL(float semitoneShift) {
+	float shift = powf(2.0f, (semitoneShift / 12.0f));
+	pitchShifterDL.setShift(shift);
+}
+
+
+/*** WSOLA Pitch Shift Functions ***/
+void PitchShifter::initWSOLA(int sampleRate, int bufferLength) {
 	this->sampleRate = sampleRate;
 	this->bufferLength = bufferLength;
 	
 	// Required settings from WSOLA pitch shifter tool
-	pitchShifter.setSampleRate(sampleRate);
-	pitchShifter.setChannels(1);
+	pitchShifterWSOLA.setSampleRate(sampleRate);
+	pitchShifterWSOLA.setChannels(1);
 };
 
-void PitchShifter::readIn(float* audioBuffer) {
+void PitchShifter::readInWSOLA(float* audioBuffer) {
 	// Add input audio frames to pitch shifter tool
-	pitchShifter.putSamples(audioBuffer, bufferLength);
+	pitchShifterWSOLA.putSamples(audioBuffer, bufferLength);
 }
 
-void PitchShifter::shift(float currentF0, float shiftAmount) {
+void PitchShifter::shiftWSOLA(float currentF0, float shiftAmount) {
 	// Set a +/- semitone pitch shift amount
-	pitchShifter.setPitchSemiTones(shiftAmount);
+	pitchShifterWSOLA.setPitchSemiTones(shiftAmount);
 }
 
-int PitchShifter::readOut(float* audioBuffer) {
+int PitchShifter::readOutWSOLA(float* audioBuffer) {
 	// Read shifted audio frames from pitch shifter tool
 	int nSamples = 0;
-	nSamples = pitchShifter.receiveSamples(audioBuffer, bufferLength);
+	nSamples = pitchShifterWSOLA.receiveSamples(audioBuffer, bufferLength);
 	return nSamples;
 }
 

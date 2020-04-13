@@ -23,9 +23,22 @@ void LEDManager::updateNotes(BelaContext* context, int numHarmonies, int note1, 
 	}
 }
 
+void LEDManager::lightUpTo(BelaContext* context, int pinNum) {
+	this->clearNotes(context);
+	
+	for (int pin = MIN_LED_PIN; pin <= (pinNum + MIN_LED_PIN); pin++) {
+		digitalWrite(context, 0, pin, HIGH);
+	}
+}
+
+void LEDManager::lightPin(BelaContext* context, int pinNum) {
+	this->clearNotes(context);
+	
+	digitalWrite(context, 0, (pinNum + MIN_LED_PIN), HIGH);
+}
+
 void LEDManager::clearNotes(BelaContext* context) {
 	for (int pin = MIN_LED_PIN; pin <= MAX_LED_PIN; pin++) {
-		pinMode(context, 0, pin, OUTPUT);
 		digitalWrite(context, 0, pin, LOW);
 	}
 }

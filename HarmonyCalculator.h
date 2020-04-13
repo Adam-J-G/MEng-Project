@@ -4,7 +4,7 @@
 
 class HarmonyCalculator {
 public:
-	void setKeySig(int keySig);
+	void setKeySig(int key);
 	void setInputValues(float currentF0, float currentThereminVal);
 	int getNoteIn();
 	int getFirstHarmonyNote();
