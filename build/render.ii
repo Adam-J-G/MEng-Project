@@ -19485,10 +19485,10 @@ private:
  PulseIn mixPulseIn;
 
  int minPulseLength = 7;
- int maxPulseLength = 1000;
  float rescaleVal = 58;
  int triggerInterval = 2646;
  int pitchTriggerCount = 0;
+ int mixTriggerCount = 0;
 
  unsigned int pitchTriggerDigitalOutPin = 0;
  unsigned int pitchEchoDigitalInPin = 1;
@@ -19544,6 +19544,8 @@ class LEDManager {
 public:
  void init(BelaContext *context);
  void updateNotes(BelaContext* context, int numHarmonies, int note1, int note2, int note3, int note4);
+ void lightUpTo(BelaContext* context, int pinNum);
+ void lightPin(BelaContext* context, int pinNum);
  void clearNotes(BelaContext* context);
 private:
  int getLEDPin(int note);
@@ -39935,7 +39937,7 @@ private:
 
 
 enum PitchShiftType { DelayLine, WSOLA };
-PitchShiftType psType = WSOLA;
+PitchShiftType psType = DelayLine;
 
 int bufferPointer = 0;
 int psBufferPointer = 0;
@@ -39983,14 +39985,15 @@ float gainPot = 0.0f;
 float harmonyPot = 0.0f;
 float keyPot = 0.0f;
 float reverbPot = 0.0f;
-int pgaGain = 0;
-int prevPgaGain = 0;
+float prevGainPot = 0.0f;
+float prevHarmonyPot = 0.0f;
+float prevKeyPot = 0.0f;
+float prevReverbPot = 0.0f;
+float pgaGain = 0.0f;
 int numHarmonies = 0;
-int prevNumHarmonies = 0;
 int keySig = 0;
-int prevKeySig = 0;
-int reverbAmount = 0;
-int prevReverbAmount = 0;
+bool valueChanged = false;
+int valueChangedTimer = 0;
 
 
 bool setup(BelaContext *context, void *userData)
@@ -39999,7 +40002,13 @@ bool setup(BelaContext *context, void *userData)
  sampleRate = context->audioSampleRate;
  numFrames = context->audioFrames;
  thereminRead = sampleRate / numFrames;
- harmonyRead = (sampleRate / 2048) / 2;
+
+ if (psType == DelayLine) {
+  harmonyRead = (sampleRate / 2048) / 8;
+ }
+ if (psType == WSOLA) {
+  harmonyRead = (sampleRate / 2048) / 2;
+ }
 
 
  thereminReader.init(context);
@@ -40073,24 +40082,15 @@ void process_shift(float *inBuffer, int inBufferPointer, float *procBuffer1, flo
  harmonyCount++;
 
 
-
-
-
- prevPgaGain = pgaGain;
- prevNumHarmonies = numHarmonies;
- prevKeySig = keySig;
- prevReverbAmount = reverbAmount;
-
-
-
-
- Bela_setPgaGain(map(gainPot, 0, 1, 0, 50), 0);
- numHarmonies = static_cast<int>(roundf(map(harmonyPot, 0, 0.86, 0, 3)));
- harmonyCalculator.setKeySig(static_cast<int>(roundf(map(keyPot, 0, 0.86, 0, 11))));
- reverberator.setMix(reverbPot);
-
-
-
+ if (abs(gainPot - prevGainPot) > 0.005f) {
+  Bela_setPgaGain(pgaGain, 0);
+ }
+ if (abs(keyPot - prevKeyPot) > 0.005f) {
+  harmonyCalculator.setKeySig(keySig);
+ }
+ if (abs(reverbPot - prevReverbPot) > 0.005f) {
+  reverberator.setMix(reverbPot);
+ }
 
 
  if (psType == DelayLine) {
@@ -40120,13 +40120,13 @@ void process_shift(float *inBuffer, int inBufferPointer, float *procBuffer1, flo
 
 
   if (numHarmonies > 0) {
-   pitchShifter1.shiftWSOLA(currentF0, 3.0);
+   pitchShifter1.shiftWSOLA(currentF0, harmonyCalculator.getFirstHarmonyShift());
   }
   if (numHarmonies > 1) {
-   pitchShifter2.shiftWSOLA(currentF0, -3.0);
+   pitchShifter2.shiftWSOLA(currentF0, harmonyCalculator.getSecondHarmonyShift());
   }
   if (numHarmonies > 2) {
-   pitchShifter3.shiftWSOLA(currentF0, 5.0);
+   pitchShifter3.shiftWSOLA(currentF0, harmonyCalculator.getThirdHarmonyShift());
   }
 
 
@@ -40164,6 +40164,9 @@ void process_shift(float *inBuffer, int inBufferPointer, float *procBuffer1, flo
     pointer = 0;
   }
  }
+ if (valueChanged == true) {
+  showLEDNotes = false;
+ }
 }
 
 void pitch_shift_background(void*)
@@ -40183,12 +40186,17 @@ void render(BelaContext *context, void *userData)
   inputAudioBuffer[bufferPointer] = audioRead(context, frameCount, 0);
 
   if (psType == DelayLine) {
-   outputAudioBuffer[frameCount] = reverberator.applyReverb(
-    inputAudioBuffer[bufferPointer]
-    + (pitchShifter1.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
-    + (pitchShifter2.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
-    + (pitchShifter3.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel)
-   );
+   outputAudioBuffer[frameCount] = inputAudioBuffer[bufferPointer];
+   if (numHarmonies > 0) {
+    outputAudioBuffer[frameCount] += (pitchShifter1.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel);
+   }
+   if (numHarmonies > 1) {
+    outputAudioBuffer[frameCount] += (pitchShifter2.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel);
+   }
+   if (numHarmonies > 2) {
+    outputAudioBuffer[frameCount] += (pitchShifter3.shiftDL(inputAudioBuffer[bufferPointer]) * mixLevel);
+   }
+   outputAudioBuffer[frameCount] = reverberator.applyReverb(outputAudioBuffer[frameCount]);
   }
   if (psType == WSOLA) {
    outputAudioBuffer[frameCount] = reverberator.applyReverb(
@@ -40200,7 +40208,7 @@ void render(BelaContext *context, void *userData)
   }
 
   for(int channel = 0; channel < 2; channel++) {
-   audioWrite(context, frameCount, channel, (outputAudioBuffer[frameCount] / ((numHarmonies + 1) * mixLevel)));
+   audioWrite(context, frameCount, channel, outputAudioBuffer[frameCount]);
   }
 
   bufferPointer++;
@@ -40208,12 +40216,52 @@ void render(BelaContext *context, void *userData)
    bufferPointer = 0;
 
   sampleCount++;
+  valueChangedTimer++;
   if(sampleCount >= 2048) {
+
+
+
+
+   prevGainPot = gainPot;
+   prevHarmonyPot = harmonyPot;
+   prevKeyPot = keyPot;
+   prevReverbPot = reverbPot;
+
 
    gainPot = analogRead(context, 0, 1);
    harmonyPot = analogRead(context, 0, 2);
    keyPot = analogRead(context, 0, 3);
    reverbPot = analogRead(context, 0, 4);
+
+
+   pgaGain = map(gainPot, 0, 0.86, 0, 50);
+   numHarmonies = static_cast<int>(roundf(map(harmonyPot, 0, 0.86, 0, 3)));
+   keySig = static_cast<int>(roundf(map(keyPot, 0, 0.86, 0, 11)));
+
+
+   if (abs(gainPot - prevGainPot) > 0.005f) {
+    valueChanged = true;
+    valueChangedTimer = 0;
+    ledManager.lightUpTo(context, static_cast<int>(pgaGain / 4.17f));
+   }
+   if (abs(harmonyPot - prevHarmonyPot) > 0.005f) {
+    valueChanged = true;
+    valueChangedTimer = 0;
+    ledManager.lightUpTo(context, numHarmonies);
+   }
+   if (abs(keyPot - prevKeyPot) > 0.005f) {
+    valueChanged = true;
+    valueChangedTimer = 0;
+    ledManager.lightPin(context, keySig);
+   }
+   if (abs(reverbPot - prevReverbPot) > 0.005f) {
+    valueChanged = true;
+    valueChangedTimer = 0;
+    ledManager.lightUpTo(context, static_cast<int>(reverbPot * 13.5f));
+   }
+
+
+
 
    psBufferPointer = bufferPointer;
    Bela_scheduleAuxiliaryTask(pitchShiftTask);
@@ -40223,18 +40271,26 @@ void render(BelaContext *context, void *userData)
  }
 
 
+ float pitchThereminVal = thereminReader.readPitch(context);
+ if (pitchThereminVal != 0.0f) {
+  thereminPitchDistance = pitchThereminVal;
+
+ }
+ float mixThereminVal = thereminReader.readMix(context);
+ if (mixThereminVal != 0.0f) {
+  thereminMixDistance = mixThereminVal;
+  mixLevel = min(1.0f, powf(map(thereminMixDistance, 0.0, 6.0, 0.0, 1.0), 2.7182818284590452354));
+
+ }
+
+
  if (thereminCount == thereminRead) {
   thereminCount = 0;
-
-  thereminPitchDistance = 10.0f;
-
-
-
  }
  thereminCount++;
 
 
- if (showLEDNotes) {
+ if (showLEDNotes && (valueChangedTimer > sampleRate)) {
   ledManager.updateNotes(
    context,
    numHarmonies,
@@ -40243,14 +40299,12 @@ void render(BelaContext *context, void *userData)
    harmonyCalculator.getSecondHarmonyNote(),
    harmonyCalculator.getThirdHarmonyNote()
   );
- } else {
+ } else if (!valueChanged) {
   ledManager.clearNotes(context);
  }
-
-
-
-
- mixLevel = 0.8f;
+ if (valueChanged && (valueChangedTimer > sampleRate)) {
+  valueChanged = false;
+ }
 }
 
 void cleanup(BelaContext *context, void *userData)

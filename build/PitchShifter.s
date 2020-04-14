@@ -30,14 +30,23 @@ _ZN12PitchShifter6initDLEi:             @ @_ZN12PitchShifter6initDLEi
 	push	{r4, r10, r11, lr}
 	.setfp	r11, sp, #8
 	add	r11, sp, #8
+	.vsave	{d8}
+	vpush	{d8}
 	vmov	s0, r1
 	mov	r4, r0
 	vcvt.f64.s32	d0, s0
 	bl	_ZN3stk3Stk13setSampleRateEd
-	vmov.f64	d0, #1.000000e+00
+	vmov.f64	d8, #1.000000e+00
 	mov	r0, r4
+	vmov.f64	d0, d8
+	bl	_ZN3stk8PitShift8setShiftEd
+	ldr	r0, [r4]
+	vmov.f64	d0, d8
+	ldr	r1, [r0, #16]
+	mov	r0, r4
+	vpop	{d8}
 	pop	{r4, r10, r11, lr}
-	b	_ZN3stk8PitShift8setShiftEd
+	bx	r1
 .Lfunc_end0:
 	.size	_ZN12PitchShifter6initDLEi, .Lfunc_end0-_ZN12PitchShifter6initDLEi
 	.fnend

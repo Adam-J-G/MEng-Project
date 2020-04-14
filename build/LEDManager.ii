@@ -3149,6 +3149,8 @@ class LEDManager {
 public:
  void init(BelaContext *context);
  void updateNotes(BelaContext* context, int numHarmonies, int note1, int note2, int note3, int note4);
+ void lightUpTo(BelaContext* context, int pinNum);
+ void lightPin(BelaContext* context, int pinNum);
  void clearNotes(BelaContext* context);
 private:
  int getLEDPin(int note);
@@ -3176,9 +3178,22 @@ void LEDManager::updateNotes(BelaContext* context, int numHarmonies, int note1, 
  }
 }
 
+void LEDManager::lightUpTo(BelaContext* context, int pinNum) {
+ this->clearNotes(context);
+
+ for (int pin = 4; pin <= (pinNum + 4); pin++) {
+  digitalWrite(context, 0, pin, HIGH);
+ }
+}
+
+void LEDManager::lightPin(BelaContext* context, int pinNum) {
+ this->clearNotes(context);
+
+ digitalWrite(context, 0, (pinNum + 4), HIGH);
+}
+
 void LEDManager::clearNotes(BelaContext* context) {
  for (int pin = 4; pin <= 15; pin++) {
-  pinMode(context, 0, pin, 0x1);
   digitalWrite(context, 0, pin, LOW);
  }
 }

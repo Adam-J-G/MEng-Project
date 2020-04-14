@@ -6,6 +6,7 @@
 void PitchShifter::initDL(int sampleRate) {
 	stk::Stk::setSampleRate(sampleRate);
 	pitchShifterDL.setShift(1.0);
+	pitchShifterDL.setEffectMix(1.0);
 }
 
 float PitchShifter::shiftDL(float frame) {
