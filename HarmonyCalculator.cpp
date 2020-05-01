@@ -15,25 +15,31 @@ void HarmonyCalculator::setKeySig(int key) {
 }
 
 void HarmonyCalculator::setInputValues(float currentF0, float currentThereminVal) {
+	// Handle no found input pitch
 	if (currentF0 == 0.0f) {
 		noteIn = firstHarmonyNote = secondHarmonyNote = thirdHarmonyNote = 0;
 		firstHarmonyShift = secondHarmonyShift = thirdHarmonyShift = 0.0f;
 		return;
 	}
+	
+	// Translate distance (cm) to a suitable interval value
 	interval = (currentThereminVal / 5.0f);
 	
 	// Estimate closest note from current pitch
 	float noteInNum = log10f(currentF0 / 27.5f) / log10f(powf(2.0f, 1.0f / 12.0f));
 	noteIn = static_cast<int>(roundf(noteInNum)) % 12; // A = 0
 	
+	// Obtain paramaters for harmony note calculation
 	int noteIndex = getNoteInScaleIndex(noteIn);
 	float intervalRound = roundf(interval);
 	float intervalDif = interval - intervalRound;
 	
+	// Calculate harmony notes
 	firstHarmonyNote = scale[((noteIndex + static_cast<int>(intervalRound)) % 7)];
 	secondHarmonyNote = scale[((noteIndex + (static_cast<int>(intervalRound) * 2)) % 7)];
 	thirdHarmonyNote = scale[((noteIndex + (static_cast<int>(intervalRound) * 3)) % 7)];
 	
+	// Calculate required semitone pitch shifts
 	firstHarmonyShift = firstHarmonyNote - noteIn + intervalDif;
 	if (firstHarmonyShift > 6.0f) {
 		firstHarmonyShift = firstHarmonyShift - 12.0f;
