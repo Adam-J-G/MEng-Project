@@ -20,14 +20,7 @@ void HarmonyCalculator::setInputValues(float currentF0, float currentThereminVal
 		firstHarmonyShift = secondHarmonyShift = thirdHarmonyShift = 0.0f;
 		return;
 	}
-	
-	// Account for single dropouts in theremin readings
-	//if (currentThereminVal == 0.0f) {
-	//	interval = (prevThereminVal - 20.0f) / 4.0f;
-	//} else {
 	interval = (currentThereminVal / 5.0f);
-	//}
-	prevThereminVal = currentThereminVal;
 	
 	// Estimate closest note from current pitch
 	float noteInNum = log10f(currentF0 / 27.5f) / log10f(powf(2.0f, 1.0f / 12.0f));
@@ -36,7 +29,6 @@ void HarmonyCalculator::setInputValues(float currentF0, float currentThereminVal
 	int noteIndex = getNoteInScaleIndex(noteIn);
 	float intervalRound = roundf(interval);
 	float intervalDif = interval - intervalRound;
-	
 	
 	firstHarmonyNote = scale[((noteIndex + static_cast<int>(intervalRound)) % 7)];
 	secondHarmonyNote = scale[((noteIndex + (static_cast<int>(intervalRound) * 2)) % 7)];
@@ -95,7 +87,7 @@ int HarmonyCalculator::getThirdHarmonyNote() {
 }
 
 float HarmonyCalculator::getFirstHarmonyShift() {
-	return firstHarmonyNote;
+	return firstHarmonyShift;
 }
 
 float HarmonyCalculator::getSecondHarmonyShift() {

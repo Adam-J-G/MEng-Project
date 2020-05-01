@@ -20,7 +20,6 @@ private:
 	int keySig = 0;
 	int scale[7] = { 0, 2, 4, 5, 7, 9, 11 };
 	float interval = 0.0f;
-	float prevThereminVal = 0.0f;
 	
 	int noteIn = 0;
 	int firstHarmonyNote = 0;
